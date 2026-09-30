@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chemical Discovery Group</title>
+<meta name="description" content="Chemical Discovery Group: understanding how drugs act, and how to make them better, with proteomics, chemoproteomics, XL-MS, systems biology, cell assays and drug synthesis.">
+<link rel="icon" href="assets/logo/CDG_logo-outlined.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="bg-glow" id="bgGlow" aria-hidden="true"></div>
+
+<header class="hdr">
+  <a class="logo" href="#/home" aria-label="Chemical Discovery Group — home">
+    <img class="logo-mark" src="assets/logo/CDG_logo-outlined.svg" alt="" width="126" height="52">
+    <span class="logo-sep" aria-hidden="true"></span>
+    <span class="logo-name">Chemical<br>Discovery Group</span>
+  </a>
+  <nav aria-label="Primary"><ul class="nav" id="nav"></ul></nav>
+  <button class="menu" id="menuBtn" aria-expanded="false" aria-controls="nav">MENU</button>
+</header>
+
+<main id="app">
+  <!-- HOME · a scroll story over the four forms of the particle scene -->
+  <div class="page active" id="page-home">
+    <section class="hero" data-stage="0">
+      <div class="content" id="hero"></div>
+    </section>
+    <section class="panel" data-stage="1">
+      <div class="copy wide" id="showcase"></div>
+    </section>
+    <section class="panel statement" data-stage="2">
+      <div class="copy" id="approach"></div>
+    </section>
+    <section class="panel" data-stage="3">
+      <div class="copy" id="molecule"></div>
+    </section>
+  </div>
+
+  <div class="page" id="page-research"><section class="inner"><div class="wrap" id="research"></div></section></div>
+  <div class="page" id="page-groups"><section class="inner"><div class="wrap" id="groups"></div></section></div>
+  <div class="page" id="page-publications"><section class="inner"><div class="wrap" id="publications"></div></section></div>
+  <div class="page" id="page-contact"><section class="inner"><div class="wrap" id="contact"></div></section></div>
+</main>
+
+<footer class="site-foot" id="footer"></footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="modal-card"><button class="modal-x" id="modalClose" aria-label="Close">×</button><div id="modalBody"></div></div>
+</div>
+
+<!-- load order matters: content → libraries → renderers → scene → app -->
+<script src="data/data.site.js"></script>
+<script src="data/data.groups.js"></script>
+<script src="data/data.research.js"></script>
+<script src="data/data.publications.js"></script>
+<script src="data/data.team.js"></script>
+<script src="data/data.contact.js"></script>
+<script src="js/vendor/three.min.js"></script>
+<script src="js/vendor/d3.min.js"></script>
+<script src="js/render.js"></script>
+<script src="js/network.js"></script>
+<script src="js/scene.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
