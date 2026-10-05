@@ -23,7 +23,7 @@
 SITE.publications = {
   tag: "Publications",
   heading: "Our scientific output",
-  intro: "Selected recent publications. Filter by group or keyword.",
+  intro: "Selected publications from both groups. Filter by group or search by keyword.",
   searchPlaceholder: "Filter by keyword, author, or journal…",
 
   items: [

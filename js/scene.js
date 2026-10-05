@@ -366,7 +366,7 @@
   var camera = new T.PerspectiveCamera(FOV, 1, 1, 500); camera.position.set(0, 0, CAM);
 
   /* ── placement: where each form sits (home story vs. inner pages) ── */
-  var PAGE_FORM = { home: 0, research: 3, groups: 1, publications: 2, contact: 0 };
+  var PAGE_FORM = { home: 0, research: 3, groups: 1, publications: 2, news: 0, contact: 0 };
   var mode = 'home', vw = 1, vh = 1, halfH = 1, halfW = 1, narrow = false, stageMid = [], glowPos = [];
   var target = [[0, 0, 1, 1], [0, 0, 1, 1], [0, 0, 1, 1], [0, 0, 1, 1]], curPl = null, dimT = 1, dimS = 1, glowT = [75, 48];
   function fit(wf, hf, R) { return Math.min(wf * 2 * halfW, hf * 2 * halfH) / (2 * R); }

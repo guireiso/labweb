@@ -29,9 +29,9 @@
     });
     var staff = SITE.team.members.filter(function (m) { return m.level === 'staff'; });
     if (staff.length) {
-      nodes.push({ id: 'lv-staff', type: 'level', label: 'Staff\nScientist', r: 13, color: NEUTRAL, count: staff.length });
+      nodes.push({ id: 'lv-staff', type: 'level', label: ((SITE.teamLevels || []).filter(function (l) { return l.key === 'staff'; })[0] || { label: 'Staff' }).label, r: 13, color: NEUTRAL, count: staff.length });
       links.push({ source: 'root', target: 'lv-staff', color: NEUTRAL, w: 1.2 });
-      if (!collapsed['lv-staff']) staff.forEach(function (m, i) { var id = 'st-' + i; nodes.push({ id: id, type: 'person', label: m.name, sub: m.role + ' · shared', r: 17, color: NEUTRAL, person: m }); links.push({ source: 'lv-staff', target: id, color: NEUTRAL, w: 1 }); });
+      if (!collapsed['lv-staff']) staff.forEach(function (m, i) { var id = 'st-' + i; nodes.push({ id: id, type: 'person', label: m.name, sub: m.role + ' · ' + SITE.ui.sharedTag, r: 17, color: NEUTRAL, person: m }); links.push({ source: 'lv-staff', target: id, color: NEUTRAL, w: 1 }); });
     }
     (SITE.affiliated || []).forEach(function (a) {
       nodes.push({ id: 'af-' + a.key, type: 'person', label: a.name, sub: a.role, r: 17, color: NEUTRAL, person: a, dashed: true });
@@ -52,7 +52,7 @@
     if (sim) sim.nodes().forEach(function (n) { prev[n.id] = n; });
     data.nodes.forEach(function (n) { var p = prev[n.id]; if (p) { n.x = p.x; n.y = p.y; } });
     var svg = d3.select(host).append('svg').attr('viewBox', [-W / 2, -H / 2, W, H]).attr('width', '100%').attr('height', H).attr('role', 'img')
-      .attr('aria-label', 'Network of the Chemical Discovery Group: two principal investigators, their teams, shared technicians and affiliated researchers');
+      .attr('aria-label', SITE.ui.networkAria);
     svgSel = svg;
     var defs = svg.append('defs'), gAll = svg.append('g');
     zoomBeh = d3.zoom().scaleExtent([0.4, 2.6]).on('zoom', function (ev) { gAll.attr('transform', ev.transform); });

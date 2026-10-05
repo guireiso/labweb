@@ -8,9 +8,10 @@
   var $ = function (id) { return document.getElementById(id); };
 
   /* ── helpers ── */
+  function U() { return SITE.ui || {}; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
   // [bracketed text] is a placeholder waiting for real content: make it visible as such
-  function ph(html) { return String(html == null ? '' : html).replace(/\[([^\]]+)\]/g, '<span class="ph" title="Placeholder — replace in data/">[$1]</span>'); }
+  function ph(html) { return String(html == null ? '' : html).replace(/\[([^\]]+)\]/g, '<span class="ph" title="' + esc(U().placeholderTip) + '">[$1]</span>'); }
   function group(key) { return (SITE.groups || []).filter(function (g) { return g.key === key; })[0]; }
   function gstyle(g) { return g ? ' style="--g:' + g.color + ';--gs:' + g.colorSoft + '"' : ''; }
   function dots(keys) { return '<span class="gdots">' + (keys || []).map(function (k) { var g = group(k); return g ? '<i style="background:' + g.color + '" title="' + esc(g.name) + '"></i>' : ''; }).join('') + '</span>'; }
@@ -58,7 +59,7 @@
       '<div class="gcard-top">' + avatar(pi, 'av-md') + '<div><h3>' + esc(g.name) + '</h3><p class="who">' + esc(pi.name) + (pi.degree ? ', ' + esc(pi.degree) : '') + '</p></div></div>' +
       '<p class="tagline">' + ph(g.tagline) + '</p>' +
       '<ul class="tags">' + g.focusAreas.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
-      '<a class="more" href="#/groups/' + g.key + '">View group <span aria-hidden="true">→</span></a></article>';
+      '<a class="more" href="#/groups/' + g.key + '">' + esc(U().viewGroup) + ' <span aria-hidden="true">→</span></a></article>';
   }
   function renderHome() {
     var h = SITE.hero;
@@ -86,7 +87,7 @@
 
   /* ── RESEARCH ── */
   function filterPills(id, allLabel) {
-    return '<div class="pills" role="group" aria-label="Filter by group" id="' + id + '"><button class="pill on" data-f="all">' + esc(allLabel || 'All') + '</button>' +
+    return '<div class="pills" role="group" aria-label="' + esc(U().filterByGroup) + '" id="' + id + '"><button class="pill on" data-f="all">' + esc(allLabel || U().all) + '</button>' +
       SITE.groups.map(function (g) { return '<button class="pill"' + gstyle(g) + ' data-f="' + g.key + '"><i></i>' + esc(g.shortName) + '</button>'; }).join('') + '</div>';
   }
   function renderResearch() {
@@ -95,7 +96,7 @@
       '<div class="grid" id="resGrid">' + r.projects.map(function (p) {
         var g = group(p.groups[0]);
         return '<article class="card proj" data-groups="' + p.groups.join(' ') + '"' + gstyle(p.groups.length > 1 ? null : g) + '>' +
-          '<div class="card-top">' + dots(p.groups) + (p.groups.length > 1 ? '<span class="cross">Cross-group</span>' : '<span class="cross">' + esc(g ? g.shortName : '') + '</span>') + '</div>' +
+          '<div class="card-top">' + dots(p.groups) + (p.groups.length > 1 ? '<span class="cross">' + esc(U().crossGroup) + '</span>' : '<span class="cross">' + esc(g ? g.shortName : '') + '</span>') + '</div>' +
           '<h3>' + ph(esc(p.title)) + '</h3><p>' + ph(p.text) + '</p><ul class="tags">' + p.tags.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul></article>';
       }).join('') + '</div>';
   }
@@ -105,7 +106,7 @@
     var gp = SITE.groupsPage;
     var aff = (SITE.affiliated || []).map(function (a) { return '<li>' + avatar(a, 'av-sm') + '<div><b>' + esc(a.name) + '</b> · ' + esc(a.role) + '<br><span>' + ph(a.note) + '</span></div></li>'; }).join('');
     $('groups').innerHTML = head(gp.tag, gp.heading, gp.intro) +
-      '<div class="netpanel rv d3"><div class="netbar"><span class="eyebrow">People</span><span class="hint">' + esc(gp.networkHint) + '</span><button class="reset" id="netReset">Reset view</button></div>' +
+      '<div class="netpanel rv d3"><div class="netbar"><span class="eyebrow">' + esc(U().people) + '</span><span class="hint">' + esc(gp.networkHint) + '</span><button class="reset" id="netReset">' + esc(U().resetView) + '</button></div>' +
       '<div id="peopleNet" class="net"></div></div>' +
       (aff ? '<ul class="affil rv">' + aff + '</ul>' : '') +
       '<div class="tabs rv" role="tablist" id="groupTabs">' + SITE.groups.map(function (g, i) {
@@ -121,21 +122,21 @@
       return '<div class="lvl"><h4>' + esc(l.label) + '</h4><ul class="people">' + list.map(person).join('') + '</ul></div>';
     }).join('');
     var alumni = ((SITE.team.alumni || {}).list || []).filter(function (a) { return a.group === g.key; });
-    var orcid = c.orcid && !/^0000-0000-0000-0000$/.test(c.orcid) ? '<a href="https://orcid.org/' + esc(c.orcid) + '" target="_blank" rel="noopener">ORCID ' + esc(c.orcid) + '</a>' : '<span class="ph">[ORCID]</span>';
-    var email = /@/.test(c.email || '') && !/^\[/.test(c.email) ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>' : ph(esc(c.email || '[contact email]'));
+    var orcid = c.orcid && !/^0000-0000-0000-0000$/.test(c.orcid) ? '<a href="https://orcid.org/' + esc(c.orcid) + '" target="_blank" rel="noopener">ORCID ' + esc(c.orcid) + '</a>' : '<span class="ph">' + esc(U().orcidPh) + '</span>';
+    var email = /@/.test(c.email || '') && !/^\[/.test(c.email) ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>' : ph(esc(c.email || U().emailPh));
     $('profile').setAttribute('style', '--g:' + g.color + ';--gs:' + g.colorSoft);
     $('profile').innerHTML =
       '<div class="pf-side">' + avatar(pi, 'av-xl') + '<h3>' + esc(pi.name) + (pi.degree ? ', ' + esc(pi.degree) : '') + '</h3><p class="role">' + esc(pi.role) + ' · ' + esc(g.name) + '</p>' +
-      '<ul class="contact-mini"><li>' + email + '</li><li>' + orcid + '</li><li><span class="ph" title="Add the scholar profile link in data/data.groups.js">' + esc(c.scholarLabel || 'Scholar profile') + '</span></li></ul>' +
-      '<span class="btn btn-ghost disabled" title="Add a CV file and link it in data/data.groups.js">' + esc(pi.cvButtonLabel || 'Download CV').toUpperCase() + '</span></div>' +
+      '<ul class="contact-mini"><li>' + email + '</li><li>' + orcid + '</li><li><span class="ph" title="' + esc(U().scholarTip) + '">' + esc(c.scholarLabel || U().scholarDefault) + '</span></li></ul>' +
+      '<span class="btn btn-ghost disabled" title="' + esc(U().cvTip) + '">' + esc(pi.cvButtonLabel || U().downloadCv).toUpperCase() + '</span></div>' +
       '<div class="pf-main"><p class="tagline big">' + ph(g.tagline) + '</p><ul class="tags">' + g.focusAreas.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
-      '<h4>Research philosophy</h4>' + pi.researchPhilosophy.map(function (p) { return '<p>' + ph(p) + '</p>'; }).join('') +
-      '<h4>Biography</h4>' + pi.biography.map(function (p) { return '<p>' + ph(p) + '</p>'; }).join('') +
-      '<h4>Academic highlights</h4><ul class="hl-list">' + pi.academicHighlights.map(function (p) { return '<li>' + ph(esc(p)) + '</li>'; }).join('') + '</ul></div>' +
-      '<div class="pf-team"><h4 class="team-h">Team</h4>' + (roster || '<p class="empty">No current members recorded for this group yet.</p>') +
-      (staff.length ? '<div class="lvl shared"><h4>Staff · shared by both groups</h4><ul class="people">' + staff.map(person).join('') + '</ul></div>' : '') +
+      '<h4>' + esc(U().researchPhilosophy) + '</h4>' + pi.researchPhilosophy.map(function (p) { return '<p>' + ph(p) + '</p>'; }).join('') +
+      '<h4>' + esc(U().biography) + '</h4>' + pi.biography.map(function (p) { return '<p>' + ph(p) + '</p>'; }).join('') +
+      '<h4>' + esc(U().academicHighlights) + '</h4><ul class="hl-list">' + pi.academicHighlights.map(function (p) { return '<li>' + ph(esc(p)) + '</li>'; }).join('') + '</ul></div>' +
+      '<div class="pf-team"><h4 class="team-h">' + esc(U().team) + '</h4>' + (roster || '<p class="empty">' + esc(U().noMembers) + '</p>') +
+      (staff.length ? '<div class="lvl shared"><h4>' + esc(U().staffShared) + '</h4><ul class="people">' + staff.map(person).join('') + '</ul></div>' : '') +
       '<h4 class="team-h">' + esc((SITE.team.alumni || {}).heading || 'Alumni') + '</h4>' +
-      (alumni.length ? '<ul class="alumni">' + alumni.map(function (a) { return '<li>' + avatar(a, 'av-sm') + '<div><b>' + esc(a.name) + '</b> · ' + esc(a.role) + ' · ' + ph(esc(a.years || '')) + '<span>' + ph(esc(a.now || '')) + '</span></div></li>'; }).join('') + '</ul>' : '<p class="empty">No alumni recorded yet.</p>') + '</div>';
+      (alumni.length ? '<ul class="alumni">' + alumni.map(function (a) { return '<li>' + avatar(a, 'av-sm') + '<div><b>' + esc(a.name) + '</b> · ' + esc(a.role) + ' · ' + ph(esc(a.years || '')) + '<span>' + ph(esc(a.now || '')) + '</span></div></li>'; }).join('') + '</ul>' : '<p class="empty">' + esc(U().noAlumni) + '</p>') + '</div>';
   }
   function person(m) { return '<li class="person" data-name="' + esc(m.name) + '">' + avatar(m, 'av-sm') + '<div><b>' + esc(m.name) + '</b><span>' + esc(m.role) + '</span><p>' + ph(esc(m.bio)) + '</p></div></li>'; }
 
@@ -144,7 +145,7 @@
     var p = SITE.publications;
     $('publications').innerHTML = head(p.tag, p.heading, p.intro) +
       '<div class="pubbar rv d3">' + filterPills('pubFilter') + '<label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>' +
-      '<input id="pubSearch" type="search" placeholder="' + esc(p.searchPlaceholder) + '" aria-label="Search publications"></label></div>' +
+      '<input id="pubSearch" type="search" placeholder="' + esc(p.searchPlaceholder) + '" aria-label="' + esc(U().searchLabel) + '"></label></div>' +
       '<ol class="pubs" id="pubList">' + p.items.map(function (it) {
         var authors = ph(it.authors).replace(/\{\{HIGHLIGHT\}\}/g, '<span class="me">').replace(/\{\{\/HIGHLIGHT\}\}/g, '</span>');
         var hay = (it.year + ' ' + it.journalName + ' ' + it.title + ' ' + it.authors).toLowerCase().replace(/\{\{\/?highlight\}\}|<[^>]+>/g, '');
@@ -152,7 +153,7 @@
         return '<li class="pub" data-groups="' + it.groups.join(' ') + '" data-hay="' + esc(hay) + '"><div class="pub-meta"><span class="year">' + it.year + '</span>' +
           '<span class="badge badge-' + esc(it.journalKey) + '">' + ph(esc(it.journalName)) + '</span>' + dots(it.groups) + '</div>' +
           '<h3>' + ph(esc(it.title)) + '</h3><p class="authors">' + authors + '</p><p class="doi">' + doi + '</p></li>';
-      }).join('') + '</ol><p class="empty" id="pubEmpty" hidden>No publications match this filter.</p>';
+      }).join('') + '</ol><p class="empty" id="pubEmpty" hidden>' + esc(U().noPubs) + '</p>';
   }
 
   /* ── CONTACT ── */
@@ -163,11 +164,62 @@
       '<h4 class="fund-h">' + esc(c.funding.heading) + '</h4><ul class="badges">' + c.funding.badges.map(function (b) { return '<li>' + ph(esc(b)) + '</li>'; }).join('') + '</ul></div>' +
       '<form class="form card rv d3" id="contactForm" novalidate><h3>' + esc(c.form.heading) + '</h3>' + c.form.fields.map(function (f, i) {
         var id = 'cf' + i, ctl = f.type === 'textarea' ? '<textarea id="' + id + '" rows="5" placeholder="' + esc(f.placeholder) + '"></textarea>' :
-          (/group/i.test(f.label) ? '<select id="' + id + '"><option value="">Not sure</option>' + SITE.groups.map(function (g) { return '<option>' + esc(g.name) + '</option>'; }).join('') + '</select>' :
+          (f.isGroup ? '<select id="' + id + '"><option value="">' + esc(U().notSure) + '</option>' + SITE.groups.map(function (g) { return '<option>' + esc(g.name) + '</option>'; }).join('') + '</select>' :
           '<input id="' + id + '" type="' + esc(f.type) + '" placeholder="' + esc(f.placeholder) + '">');
         return '<label for="' + id + '">' + esc(f.label) + '</label>' + ctl;
       }).join('') + '<button class="btn btn-primary" type="submit">' + esc(c.form.submitLabel).toUpperCase() + '</button><p class="form-note" id="formNote" aria-live="polite"></p></form></div>';
   }
 
-  window.CDGRender = { all: function () { renderNav(); renderHome(); renderResearch(); renderGroups(); renderPublications(); renderContact(); renderFooter(); }, profile: renderProfile, group: group, avatar: avatar, esc: esc, ph: ph };
+
+  /* ── NEWS ── */
+  function lang() { return (window.CDGI18N && CDGI18N.lang) || 'en'; }
+  function fmtDate(iso) {
+    var d = new Date(iso + 'T12:00:00');
+    if (isNaN(d.getTime())) return String(iso || '');
+    return d.toLocaleDateString(lang() === 'pt' ? 'pt-BR' : 'en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+  function posts() { return ((SITE.news || {}).posts || []).slice().sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; }); }
+  function postMeta(p) {
+    return '<span class="nmeta"><time datetime="' + esc(p.date) + '">' + esc(fmtDate(p.date)) + '</time>' +
+      (p.tags || []).map(function (t) { return '<span class="ntag">' + ph(esc(t)) + '</span>'; }).join('') + '</span>';
+  }
+  function headline(p) { return '<li><a href="#/news/' + esc(p.slug) + '">' + postMeta(p) + '<b>' + ph(esc(p.title)) + '</b></a></li>'; }
+  function renderHomeNews() {
+    var n = SITE.news, box = $('homeNews'); if (!box) return;
+    var list = posts().slice(0, 3);
+    box.parentNode.hidden = !(n && list.length);
+    if (!n || !list.length) return;
+    box.innerHTML = '<div class="eyebrow rv">' + esc(n.homeTag || n.tag) + '</div><ul class="hnews rv d1">' + list.map(headline).join('') + '</ul>' +
+      '<a class="nlink rv d2" href="#/news">' + esc(U().allNews) + ' <span aria-hidden="true">→</span></a>';
+  }
+  function renderNews() {
+    var n = SITE.news || { posts: [] }, all = posts(), tags = [];
+    all.forEach(function (p) { (p.tags || []).forEach(function (t) { if (tags.indexOf(t) < 0) tags.push(t); }); });
+    $('news').innerHTML = '<div id="newsIndex">' + head(n.tag, esc(n.heading || ''), n.intro) +
+      (tags.length > 1 ? '<div class="pills rv d3" role="group" aria-label="' + esc(U().filterByTag) + '" id="newsFilter"><button class="pill on" data-f="all">' + esc(U().all) + '</button>' +
+        tags.map(function (t) { return '<button class="pill" data-f="' + esc(t) + '">' + ph(esc(t)) + '</button>'; }).join('') + '</div>' : '') +
+      '<div class="grid nlist" id="newsList">' + all.map(function (p) {
+        return '<article class="card npost" data-tags="' + esc((p.tags || []).join('|')) + '"><a href="#/news/' + esc(p.slug) + '">' +
+          (p.image ? '<img class="ncover" src="' + esc(encodeURI(p.image)) + '" alt="" loading="lazy">' : '') +
+          postMeta(p) + '<h3>' + ph(esc(p.title)) + '</h3>' + (p.summary ? '<p>' + ph(esc(p.summary)) + '</p>' : '') +
+          '<span class="nread">' + esc(U().readMore) + ' <span aria-hidden="true">→</span></span></a></article>';
+      }).join('') + '</div><p class="empty" id="newsEmpty" hidden>' + esc(U().noNews) + '</p></div>' +
+      '<article class="npage" id="newsPost" hidden></article>';
+  }
+  // show one post (returns it), or the list when slug is empty/unknown (returns null)
+  function renderPost(slug) {
+    var idx = $('newsIndex'), art = $('newsPost'); if (!idx || !art) return null;
+    var all = posts(), p = slug ? all.filter(function (x) { return x.slug === slug; })[0] : null;
+    if (!p) { idx.hidden = false; art.hidden = true; art.innerHTML = ''; return null; }
+    var others = all.filter(function (x) { return x !== p; }).slice(0, 3);
+    art.innerHTML = '<a class="nlink nback" href="#/news"><span aria-hidden="true">←</span> ' + esc(U().backToNews) + '</a>' +
+      postMeta(p) + '<h2>' + ph(esc(p.title)) + '</h2>' + (p.summary ? '<p class="nlead">' + ph(esc(p.summary)) + '</p>' : '') +
+      (p.image ? '<img class="nimg" src="' + esc(encodeURI(p.image)) + '" alt="">' : '') +
+      '<div class="nbody">' + (p.body || []).map(function (t) { return '<p>' + ph(t) + '</p>'; }).join('') + '</div>' +
+      (others.length ? '<h4 class="nmore-h">' + esc(U().moreNews) + '</h4><ul class="hnews">' + others.map(headline).join('') + '</ul>' : '');
+    idx.hidden = true; art.hidden = false;
+    return p;
+  }
+
+  window.CDGRender = { all: function () { renderNav(); renderHome(); renderHomeNews(); renderResearch(); renderGroups(); renderPublications(); renderNews(); renderContact(); renderFooter(); }, profile: renderProfile, post: renderPost, group: group, avatar: avatar, esc: esc, ph: ph };
 })();

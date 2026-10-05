@@ -1,55 +1,54 @@
 /* ============================================================
-   RESEARCH PAGE CONTENT
+   RESEARCH PAGE CONTENT (English — Portuguese is in data.pt.js)
    Add, remove, or edit project cards by editing the array below.
+   ⚠ data.pt.js translates the projects by position: if you add a
+   project here, add its translation at the same position there.
 
    "groups" lists the group keys (from data.groups.js) that run a
    project. List more than one key for genuine collaborations — the
    card then shows under every listed group's filter.
-
-   ⚠ Card wording follows how the PIs describe their work; refine
-   the details (methods, models, targets) with them before publishing.
    ============================================================ */
 
 SITE.research = {
   tag: "Research",
-  heading: "From mechanism of action to new medicine",
-  intro: "We follow a drug from the proteins it reaches to the cells it affects, and back to the molecule, to improve it.",
+  heading: "From mechanism of action to better compounds",
+  intro: "Our projects follow a drug from the proteins it binds to the cells it affects, and then back to the molecule.",
 
   projects: [
     {
       groups: ["oliveira"],
-      title: "Large-scale proteomics of drug action",
-      text: "How do drugs change the proteome of treated cells? We map those changes to reveal the pathways behind a drug’s mechanism of action.",
+      title: "Proteome-wide drug response",
+      text: "We quantify how treatment reshapes the proteome of cells, looking for the pathways that explain a compound’s mechanism of action.",
       tags: ["Proteomics", "Mass spectrometry", "Drug response"]
     },
     {
       groups: ["oliveira"],
       title: "Chemoproteomics and XL-MS",
-      text: "Which proteins does a drug bind, and how do protein interactions and structures change when it does? We answer with chemoproteomics and cross-linking mass spectrometry (XL-MS).",
+      text: "Which proteins does a compound bind, and how do protein interactions and structures change when it does? We address these questions with chemoproteomics and cross-linking mass spectrometry (XL-MS).",
       tags: ["Chemoproteomics", "XL-MS", "Protein–drug interactions"]
     },
     {
       groups: ["oliveira"],
-      title: "Systems biology, software and pipelines",
-      text: "We integrate proteomic data with network analysis and build the software and pipelines that turn raw proteomics data into mechanisms of action.",
+      title: "Systems biology and software",
+      text: "We build the software and pipelines that take raw proteomics data to a biological interpretation, and use network analysis to integrate results across experiments.",
       tags: ["Systems biology", "Software", "Proteomics pipelines"]
     },
     {
       groups: ["leitao"],
-      title: "What drugs do to cells",
-      text: "We use cell cultures to see what drugs do to cells, with viability assays (MTT), flow cytometry and microscopy.",
-      tags: ["MTT", "Flow cytometry", "Microscopy"]
+      title: "Cellular effects of drugs",
+      text: "In cell culture models we follow how cells respond to treatment, using viability assays, flow cytometry and microscopy.",
+      tags: ["Viability assays", "Flow cytometry", "Microscopy"]
     },
     {
       groups: ["leitao"],
       title: "Drug modification and synthesis",
-      text: "We modify and synthesize compounds to make a drug’s mechanism more specific, guided by what the proteome and the cells reveal.",
-      tags: ["Drug synthesis", "Drug modification", "Specificity"]
+      text: "We design and synthesize analogues to make a compound’s mechanism more selective, based on what the proteomic and cellular data show.",
+      tags: ["Drug synthesis", "Drug modification", "Selectivity"]
     },
     {
       groups: ["oliveira", "leitao"],
-      title: "From mechanism to a better drug",
-      text: "Proteomics shows how a drug acts, cell models show what it does, and modified compounds go back for another test. Each round improves the drug.",
+      title: "From mechanism to a better compound",
+      text: "The projects connect: proteomics points to the mechanism, cell assays test it, and new analogues go back through both. Each round refines the compound.",
       tags: ["Mechanism of action", "Cell models", "Drug design"]
     }
   ]

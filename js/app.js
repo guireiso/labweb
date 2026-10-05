@@ -7,9 +7,8 @@
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
   var reduce = !!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches);
-  var current = null, io = null, profileKey = null;
+  var current = null, currentSub = null, io = null, profileKey = null;
 
-  CDGRender.all();
 
   /* ── reveal on scroll (re-armed on every page change) ── */
   function armReveal() {
@@ -29,8 +28,11 @@
     document.title = (page === 'home' ? '' : label + ' · ') + SITE.general.pageTitle;
     document.body.setAttribute('data-page', page);
     closeMenu();
-    if (changed) { window.scrollTo(0, 0); current = page; }
+    var subChanged = route.sub !== currentSub; currentSub = route.sub;
+    if (changed || (page === 'news' && subChanged)) window.scrollTo(0, 0);
+    current = page;
     if (window.CDGScene) CDGScene.setMode(page);
+    if (page === 'news') { var post = CDGRender.post(route.sub); if (post) document.title = post.title.replace(/[\[\]]/g, '') + ' · ' + SITE.general.pageTitle; }
     if (page === 'groups') { selectGroup(route.sub || profileKey || SITE.groups[0].key, !!route.sub); setTimeout(CDGNetwork.draw, 30); }
     armReveal();
     if (page === 'home') document.querySelectorAll('.hero .rv').forEach(function (el) { setTimeout(function () { el.classList.add('in'); }, 60); });
@@ -55,12 +57,7 @@
       apply(b.getAttribute('data-f'));
     });
   }
-  var resF = 'all';
-  pills('resFilter', function (f) {
-    resF = f;
-    document.querySelectorAll('#resGrid .proj').forEach(function (c) { var ok = f === 'all' || c.getAttribute('data-groups').split(' ').indexOf(f) >= 0; c.hidden = !ok; });
-  });
-  var pubF = 'all';
+  var resF = 'all', pubF = 'all';
   function pubApply() {
     var q = ($('pubSearch').value || '').trim().toLowerCase(), n = 0;
     document.querySelectorAll('#pubList .pub').forEach(function (c) {
@@ -69,8 +66,6 @@
     });
     $('pubEmpty').hidden = n > 0;
   }
-  pills('pubFilter', function (f) { pubF = f; pubApply(); });
-  $('pubSearch').addEventListener('input', pubApply);
 
   /* ── groups: tabs + profile ── */
   function selectGroup(key, scrollTo) {
@@ -78,12 +73,49 @@
     profileKey = key;
     document.querySelectorAll('#groupTabs .tab').forEach(function (t) { var on = t.getAttribute('data-g') === key; t.classList.toggle('on', on); t.setAttribute('aria-selected', String(on)); });
     CDGRender.profile(key);
-    document.querySelectorAll('#profile .rv, #profile *').length; // profile content is not reveal-gated
     if (scrollTo) setTimeout(function () { var el = $('groupTabs'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: reduce ? 'auto' : 'smooth' }); }, 120);
   }
-  $('groupTabs').addEventListener('click', function (e) { var t = e.target.closest('.tab'); if (t) { selectGroup(t.getAttribute('data-g')); history.replaceState(null, '', '#/groups/' + t.getAttribute('data-g')); } });
-  $('netReset').addEventListener('click', function () { CDGNetwork.reset(); });
   var rz; window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(function () { if (current === 'groups') CDGNetwork.draw(); }, 200); });
+
+  // listeners on elements that render.js rebuilds (they are replaced when the language changes)
+  function bindDynamic() {
+    pills('resFilter', function (f) {
+      resF = f;
+      document.querySelectorAll('#resGrid .proj').forEach(function (c) { var ok = f === 'all' || c.getAttribute('data-groups').split(' ').indexOf(f) >= 0; c.hidden = !ok; });
+    });
+    pills('pubFilter', function (f) { pubF = f; pubApply(); });
+    pills('newsFilter', function (f) {
+      var n = 0;
+      document.querySelectorAll('#newsList .npost').forEach(function (c) { var ok = f === 'all' || c.getAttribute('data-tags').split('|').indexOf(f) >= 0; c.hidden = !ok; if (ok) n++; });
+      $('newsEmpty').hidden = n > 0;
+    });
+    $('pubSearch').addEventListener('input', pubApply);
+    $('groupTabs').addEventListener('click', function (e) { var t = e.target.closest('.tab'); if (t) { selectGroup(t.getAttribute('data-g')); history.replaceState(null, '', '#/groups/' + t.getAttribute('data-g')); } });
+    $('netReset').addEventListener('click', function () { CDGNetwork.reset(); });
+    $('contactForm').addEventListener('submit', function (e) { e.preventDefault(); $('formNote').textContent = SITE.ui.formNote; });
+  }
+
+  /* ── language ── */
+  function applyStatic() {
+    var u = SITE.ui, lang = CDGI18N.lang;
+    navEl.closest('nav').setAttribute('aria-label', u.navAria);
+    menuBtn.textContent = u.menu.toUpperCase();
+    $('modalClose').setAttribute('aria-label', u.close);
+    document.querySelector('.logo').setAttribute('aria-label', u.homeAria);
+    $('lang').setAttribute('aria-label', u.langAria);
+    document.querySelectorAll('#lang [data-lang]').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-lang') === lang)); });
+    var meta = document.querySelector('meta[name="description"]'); if (meta) meta.setAttribute('content', u.metaDescription);
+  }
+  function relang(lang) {
+    CDGI18N.set(lang);
+    resF = 'all'; pubF = 'all';
+    CDGRender.all(); bindDynamic(); applyStatic();
+    show(parse());
+  }
+  $('lang').addEventListener('click', function (e) {
+    var b = e.target.closest('[data-lang]');
+    if (b && b.getAttribute('data-lang') !== CDGI18N.lang) relang(b.getAttribute('data-lang'));
+  });
 
   /* ── modal ── */
   var lastFocus = null;
@@ -97,19 +129,14 @@
       var html = '<div class="pm" style="--g:' + (g ? g.color : '#8a96a8') + '">' + CDGRender.avatar(p, 'av-xl') +
         '<h3 id="modalTitle">' + E(p.name) + (p.degree ? ', ' + E(p.degree) : '') + '</h3><p class="role">' + E(p.role || d.sub || '') + (g ? ' · ' + E(g.name) : '') + '</p>' +
         (p.bio || p.shortBio || p.note ? '<p>' + ph(E(p.bio || p.shortBio || p.note)) + '</p>' : '');
-      if (d.type === 'pi') html += '<a class="btn btn-primary" href="#/groups/' + g.key + '" data-close>VIEW FULL PROFILE <span aria-hidden="true">→</span></a>';
+      if (d.type === 'pi') html += '<a class="btn btn-primary" href="#/groups/' + g.key + '" data-close>' + CDGRender.esc(SITE.ui.viewFullProfile).toUpperCase() + ' <span aria-hidden="true">→</span></a>';
       openModal(html + '</div>');
     }
   };
   $('modalBody').addEventListener('click', function (e) { if (e.target.closest('[data-close]')) closeModal(); });
 
-  /* ── contact form (presentational until a form service is connected) ── */
-  $('contactForm').addEventListener('submit', function (e) {
-    e.preventDefault();
-    $('formNote').textContent = 'This form is not connected yet — please email the group directly using the addresses on the left.';
-  });
-
   /* ── boot ── */
+  CDGRender.all(); bindDynamic(); applyStatic();
   show(parse());
   window.addEventListener('load', function () { if (window.CDGScene) CDGScene.remeasure(); });
 })();

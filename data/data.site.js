@@ -1,5 +1,5 @@
 /* ============================================================
-   SITE / HOME PAGE CONTENT
+   SITE / HOME PAGE CONTENT (English — Portuguese is in data.pt.js)
    Everything on the site is rendered from the global SITE object,
    built up by the data/*.js files (this one first). Edit text here —
    never in index.html or js/render.js.
@@ -17,72 +17,72 @@ SITE.general = {
 };
 
 // Order = nav order. The id is the page (and the URL hash: #/research).
-// There is no separate Team / PI page: each PI and their roster live on
-// "Groups", so both PIs are presented as equals.
+// ⚠ data.pt.js translates this list by position: keep both in the same order.
 SITE.nav = [
   { id: "home",         label: "Home" },
   { id: "research",     label: "Research" },
   { id: "groups",       label: "Groups" },
   { id: "publications", label: "Publications" },
+  { id: "news",         label: "News" },
   { id: "contact",      label: "Contact" }
 ];
 
 /* ── HOME · a scroll story; each block below sits over one form of the
-      particle scene (protein complex → two groups → network → molecule) ── */
+      particle scene (protein complex → two halves → network → molecule) ── */
 SITE.hero = {
   label: ["Structural proteomics", "Drug discovery", "Cell-based assays"],
   // wrap highlighted words in <em>…</em> (shown in teal)
   titleHtml: "How drugs act, and how to <em>make them better</em>",
-  paragraph: "We want to understand how drugs really work, and how to make them work better. We use proteomics, chemoproteomics and XL-MS to find the proteins a drug reaches, cell assays to see what it does to cells, and chemistry to improve it.",
+  paragraph: "We study what drugs do inside cells: which proteins they bind, what changes downstream and how the cell responds. We combine proteomics, chemoproteomics and XL-MS with cell-based assays and medicinal chemistry, and use what we learn to design better compounds.",
   buttons: [
     { label: "Meet the team", style: "primary",   page: "groups", arrow: true },
-    { label: "Publications",    style: "secondary", page: "publications" }
+    { label: "Publications",  style: "secondary", page: "publications" }
   ]
 };
 
-// Home · one goal, two ends of one path. The two cards are the two ends of the
-// route a drug is followed along (the people behind each are on the Groups page).
+// Home · the two ends of the path a drug is followed along
+// (the people behind each are on the Groups page).
 // icon: "proteomics" | "network" | "compute" | "assay"; group: whose colour to use
 SITE.pathway = {
-  tag: "Our Approach",
-  heading: "One goal, <em>multiple strategies</em>",
-  intro: "Understanding a drug takes more than one technique. We start with the proteins it reaches, look at how cells respond, and use what we learn to improve the molecule. Each step informs the next.",
+  tag: "Our approach",
+  heading: "One question, <em>several angles</em>",
+  intro: "No single technique tells the whole story of a drug. We start from the proteins it engages, follow how cells respond, and take those results back to the chemistry.",
   steps: [
-    { group: "oliveira", icon: "proteomics", title: "How the drug acts",
-      text: "Large-scale proteomics, chemoproteomics and XL-MS show which proteins a drug reaches and what changes as a result. Systems biology, and software we build ourselves, help us make sense of the data.",
+    { group: "oliveira", icon: "proteomics", title: "Targets and mechanism",
+      text: "Large-scale proteomics, chemoproteomics and XL-MS show which proteins a compound engages and what shifts across the proteome. Systems biology and the analysis pipelines we develop turn those changes into a mechanism.",
       tags: ["Proteomics", "Chemoproteomics", "XL-MS", "Systems biology"] },
-    { group: "leitao", icon: "assay", title: "How cells respond, and how to improve the drug",
-      text: "Cell models tell us what a drug does to cells, through viability assays (MTT), flow cytometry and microscopy. Modifying and synthesizing the compound then lets us make its action more specific.",
+    { group: "leitao", icon: "assay", title: "Cellular response and compound design",
+      text: "Viability assays, flow cytometry and microscopy show how cells respond to treatment. With that information we modify and synthesize new analogues to make the compound act more selectively.",
       tags: ["Cell-based assays", "Flow cytometry", "Microscopy", "Drug synthesis"] }
   ],
-  link: { label: "Explore the research", page: "research" }
+  link: { label: "See our research", page: "research" }
 };
 
-// Home · the network statement + what connects the two groups
+// Home · the network statement + methods
 SITE.approachIntro = {
   statement: "A drug’s effect starts as small changes across thousands of proteins.",
-  statementSub: "We follow those changes, from the protein to the cell to a better medicine.",
-  tag: "Our strategies",
-  heading: "Many ways to understand a drug"
+  statementSub: "Our work is to trace those changes back to a mechanism.",
+  tag: "Methods",
+  heading: "What we use in the lab"
 };
 
 // icon: "proteomics" | "network" | "compute" | "assay"
 SITE.approachCards = [
-  { icon: "proteomics", title: "Proteomics & Chemoproteomics",
-    text: "We measure thousands of proteins at once to see which ones a drug binds and how the cell’s proteome responds." },
-  { icon: "network", title: "XL-MS & Systems Biology",
-    text: "Cross-linking mass spectrometry shows how proteins interact and fold. Network analysis connects those findings to how the drug works." },
-  { icon: "assay", title: "Cell-based Assays",
-    text: "Cells in culture show us how a drug behaves in a living system: whether cells survive, how they divide, what they look like." },
-  { icon: "compute", title: "Drug Modification & Synthesis",
-    text: "We modify and synthesize compounds so their action becomes more specific, turning what we learn into a better molecule." }
+  { icon: "proteomics", title: "Proteomics & chemoproteomics",
+    text: "Quantitative mass spectrometry of thousands of proteins at once, to find what a compound binds and how the proteome responds." },
+  { icon: "network", title: "XL-MS & systems biology",
+    text: "Cross-linking mass spectrometry captures protein interactions and conformations; network analysis places them in the context of the drug’s mechanism." },
+  { icon: "assay", title: "Cell-based assays",
+    text: "Viability assays, flow cytometry and microscopy in cell culture models, to test each hypothesis in a living system." },
+  { icon: "compute", title: "Drug modification & synthesis",
+    text: "Design and synthesis of analogues guided by the mechanistic data, aiming for more selective compounds." }
 ];
 
 // Home · the molecule section
 SITE.moleculeSection = {
-  tag: "Drug discovery",
+  tag: "Chemistry",
   heading: "From mechanism <em>to molecule</em>",
-  text: "What we learn about how a drug acts, and what it does to cells, guides how we change the molecule to make it more specific.",
+  text: "Knowing how a compound acts, and what it does to cells, tells us which parts of the molecule are worth changing. Each new analogue goes back through the same experiments.",
   buttons: [
     { label: "Research", style: "primary", page: "research", arrow: true },
     { label: "Contact",  style: "secondary", page: "contact" }
@@ -91,16 +91,16 @@ SITE.moleculeSection = {
 
 // The "Groups" page itself
 SITE.groupsPage = {
-  tag: "The Groups",
-  heading: "Two PIs, <em>two complementary directions</em>",
-  intro: "Two groups with complementary expertise, working toward the same goal. Explore the people below, or pick a group to read its profile.",
+  tag: "The groups",
+  heading: "Two PIs, <em>complementary expertise</em>",
+  intro: "The CDG brings together two research groups that work on the same questions from different sides. Explore the network below or open a group’s page.",
   networkHint: "Click a node for details · drag to rearrange · scroll to zoom"
 };
 
 // Footer, on every page
 SITE.footer = {
-  heading: "Let’s talk about <em>new medicines</em>.",
-  text: "Want to collaborate, join us, or just learn more? Get in touch.",
+  heading: "Interested in <em>working with us</em>?",
+  text: "We are always glad to hear from prospective students, postdocs and collaborators.",
   button: { label: "Contact", page: "contact" },
   fine: "© Chemical Discovery Group"
 };

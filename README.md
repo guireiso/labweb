@@ -1,21 +1,36 @@
 # CDG_web — Chemical Discovery Group
 
-Static site: plain HTML/CSS/JS, no build step, no framework. Open `index.html` in a browser
-(everything is loaded with relative paths), or upload the folder as-is to GitHub Pages / any static host.
+Static site: plain HTML/CSS/JS, no build step, no framework, all paths relative.
 
-## Structure
-- `index.html`: empty containers + script tags. All content is rendered from `data/`.
-- `css/style.css`: design system (colours, type, layout).
-- `js/scene.js`: the WebGL particle scene (about 32k particles, Three.js): protein–ligand complex → two groups → network (face-on) → small molecule.
-- `js/render.js`, `js/app.js`, `js/network.js`: page rendering, routing and interactions, and the D3 people network.
-- `js/vendor/`: Three.js r128 and D3 v7, vendored, so there are no runtime CDN dependencies for them.
-- `data/`: all editable content (`data.site.js`, `data.groups.js`, `data.research.js`, `data.publications.js`, `data.team.js`, `data.contact.js`).
-- `data/structures/abl-dasatinib-4xey.js`: real coordinates of PDB 4XEY (c-Abl kinase + dasatinib), parsed by `scripts/parse_4xey.py`. Not loaded at the moment (the scene uses illustrative shapes); add its `<script>` tag back to use it.
-- `assets/`: logo (`CDG_logo-outlined.svg` is the one used) and HARDING fonts.
-- `design-system/`: tokens and component notes (mirrors the Design System artifact).
-- `index_v1_single-file.html`: the earlier single-file version of the site (hero + scroll story only), kept for reference.
+## Folders
+- `index.html` — empty containers + script tags (do not edit content here).
+- `data/` — **all editable content** (English, the base version): `data.site.js` (home), `data.groups.js` (PIs, groups),
+  `data.team.js` (members + past members), `data.research.js`, `data.publications.js`, `data.contact.js`,
+  `data.news.js` (news / blog posts), `data.ui.js` (small interface labels).
+- `data/data.pt.js` — the **Portuguese (Brazil)** version of all of the above.
+- `photos/` — people photos, named `POSITION_GROUP_Full Name.ext`; past members in `photos/PastMembers/`.
+  After adding a photo, reference it in `data.team.js` / `data.groups.js`.
+- `assets/` — logo and HARDING fonts.
+- `css/`, `js/` — design and code (`js/vendor/` = Three.js and D3, vendored).
 
-## Editing content
-Edit only the files in `data/`. Text in [square brackets] is a placeholder and is shown in amber on the page until replaced.
-Pages: `#/home`, `#/research`, `#/groups` (and `#/groups/leitao`), `#/publications`, `#/contact`.
-The Google Fonts stylesheet (IBM Plex) is the only external request; without it the page falls back to system fonts.
+## News (blog)
+Posts live in `data/data.news.js`. The 3 most recent appear on the home page (after the molecule section);
+all of them are on the News page (`#/news`), and each opens at `#/news/<slug>`. To add one, copy a block,
+change `slug`, `date`, `tags`, `title`, `summary` and `body` (one string per paragraph), and add the
+Portuguese with `_pt` fields (`title_pt`, `summary_pt`, `body_pt`, `tags_pt`). Images go in `photos/news/`.
+
+## Languages (EN / PT)
+The flags in the header switch the site between English (US) and Portuguese (Brazil). The choice is remembered
+in the browser; first visit uses the browser language; `?lang=pt` or `?lang=en` in the address forces one.
+- Edit English in `data/data.*.js`, Portuguese in `data/data.pt.js` (same structure; lists of cards/projects match by order).
+- Shortcut for people: in `data.team.js`, put `bio_pt: "…"` next to `bio: "…"` (works for any field: `field_pt`).
+- If you add a card/project/group in English, add its translation at the same position in `data.pt.js`; until then it shows in English.
+
+Text in [square brackets] is a placeholder, shown in amber until replaced.
+
+## Publishing on GitHub Pages
+1. Put the contents of this folder at the root of a repository (`index.html` must be at the top level).
+2. Settings → Pages → Deploy from a branch → `main` / root.
+3. The site is served at `https://<user>.github.io/<repo>/`. Links use hashes (`#/groups`), so no server rules are needed.
+
+File names are case-sensitive on GitHub: keep the exact spelling used in the data files.

@@ -34,7 +34,7 @@ SITE.groups = [
     shortName: "Reis-de-Oliveira",
     color: "#3cc7c0",
     colorSoft: "rgba(60,199,192,0.14)",
-    tagline: "Large-scale proteomics, chemoproteomics, XL-MS and systems biology, with our own software, to understand how drugs act",
+    tagline: "Large-scale proteomics, chemoproteomics, XL-MS and systems biology, with software developed in-house, to understand how drugs act",
     focusAreas: ["Proteomics & chemoproteomics", "XL-MS", "Systems biology & software"],
     pi: {
       photo: "photos/PI_Guilherme Reis-de-Oliveira.jpg",
@@ -50,7 +50,7 @@ SITE.groups = [
       },
       cvButtonLabel: "Download CV ↓",
       researchPhilosophy: [
-        "To understand a drug, it is not enough to know its target. We want to know everything it changes in the cell. Large-scale proteomics, chemoproteomics and XL-MS, together with systems biology and software we build ourselves, let us look at the whole proteome in molecular detail. Combined with cell models, that shows us how drugs act and how to improve them."
+        "Knowing a drug’s target is only the start. We want to know everything the drug changes in the cell. Large-scale proteomics, chemoproteomics and XL-MS, combined with systems biology and software we write ourselves, let us look at the whole proteome at molecular resolution. Together with cell models, that tells us how drugs act and where they can be improved."
       ],
       biography: [
         "Guilherme completed a PhD with a focus on proteomics, followed by training in integrative large-scale data analysis applied to drug discovery. The group now includes biologists, biochemists, and computational scientists working to understand how drugs modulate the proteome."
@@ -68,7 +68,7 @@ SITE.groups = [
     shortName: "Leitão",
     color: "#e8b54a",
     colorSoft: "rgba(232,181,74,0.14)",
-    tagline: "Cell-based assays and drug synthesis to see what drugs do to cells and make them more specific",
+    tagline: "Cell-based assays and medicinal chemistry to understand what drugs do to cells and make them more selective",
     focusAreas: ["Cell-based assays", "Flow cytometry & microscopy", "Drug modification & synthesis"],
     pi: {
       photo: "photos/PI_Andrei Leitao.jpg",

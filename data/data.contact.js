@@ -8,18 +8,18 @@
 SITE.contact = {
   tag: "Contact",
   heading: "Get in touch",
-  intro: "We welcome ideas for collaboration, students and postdocs who want to join us, and invitations to give seminars.",
+  intro: "Get in touch if you are interested in a collaboration, in joining the lab as a student or postdoc, or in inviting us to give a seminar.",
 
   rows: [
     {
       icon: "pin",
       label: "Location",
-      html: "Q1 Building<br>São Carlos Institute of Chemistry (IQSC)<br>University of São Paulo<br>São Carlos - SP, Brazil"
+      html: "[Room, Building]<br>[Department]<br>[University]<br>[City, Country]"
     },
     {
       icon: "mail",
-      label: "General enquiries",
-      html: "[general enquiries email]"
+      label: "General inquiries",
+      html: "[general inquiries email]"
     },
     {
       icon: "at",
@@ -29,7 +29,7 @@ SITE.contact = {
     {
       icon: "flask",
       label: "Open positions",
-      html: "Both groups regularly look for motivated students and postdocs. Check each group's profile on the Groups page to see who to contact."
+      html: "We are regularly looking for students and postdocs. Write directly to the PI whose work interests you most; their contacts are on the Groups page."
     }
   ],
 
@@ -37,7 +37,7 @@ SITE.contact = {
   // agencies/affiliations (e.g. FAPESP, CNPq, CAPES, USP, if applicable).
   funding: {
     heading: "Funding & Affiliations",
-    badges: ["FAPESP", "CNPq", "CAPES","USP", "IQSC"]
+    badges: ["[Funding agency]", "[Funding agency]", "[Affiliation]"]
   },
 
   form: {
@@ -45,7 +45,7 @@ SITE.contact = {
     fields: [
       { label: "Name",    type: "text",     placeholder: "Your full name" },
       { label: "Email",   type: "email",    placeholder: "your@email.com" },
-      { label: "Group of interest", type: "text", placeholder: "Reis-de-Oliveira / Leitão / Not sure" },
+      { label: "Group of interest", type: "text", isGroup: true, placeholder: "Reis-de-Oliveira / Leitão / Not sure" },
       { label: "Message", type: "textarea", placeholder: "Tell us about your interest…" }
     ],
     submitLabel: "Send Message →"
