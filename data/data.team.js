@@ -40,48 +40,62 @@ SITE.team = {
     { group: "leitao", level: "phd", role: "PhD Student",
       name: "Edwin Leonel Bonilla Rozo",
       photo: "photos/PhDStudent_AL_Edwin Leonel Bonilla Rozo.jpeg",
-      bio: "[Short description of this student's project.]" },
+      // bio: "", bio_pt: "",   ← short description of the project (English / Portuguese)
+    },
     { group: "leitao", level: "phd", role: "PhD Student",
       name: "Jorge Roberto Assunção Cardoso",
       photo: "photos/PhDStudent_AL_Jorge Roberto Assunção Cardoso.jpeg",
-      bio: "[Short description of this student's project.]" },
+      // bio: "", bio_pt: "",   ← short description of the project (English / Portuguese)
+    },
     { group: "leitao", level: "phd", role: "PhD Student",
       name: "Sabrina Mendes Botelho",
       photo: "photos/PhDStudent_AL_Sabrina Mendes Botelho.jpg",
-      bio: "[Short description of this student's project.]" },
+      // bio: "", bio_pt: "",   ← short description of the project (English / Portuguese)
+    },
 
     { group: "leitao", level: "msc", role: "MSc Student",
       name: "Maria Eduarda Jacinto",
       photo: "photos/MSStudent_AL_Maria Eduarda Jacinto.jpeg",
-      bio: "[Short description of this student's project.]" },
+      // bio: "", bio_pt: "",   ← short description of the project (English / Portuguese)
+    },
     { group: "leitao", level: "msc", role: "MSc Student",
       name: "Natália Wolf",
       photo: "photos/MSStudent_AL_Natália Wolf.png",
-      bio: "[Short description of this student's project.]" },
+      // bio: "", bio_pt: "",   ← short description of the project (English / Portuguese)
+    },
     { group: "leitao", level: "msc", role: "MSc Student",
       name: "Vitória Luiz Diotto",
       photo: "photos/MSStudent_AL_Vitória Luiz Diotto.jpg",
-      bio: "[Short description of this student's project.]" },
+      // bio: "", bio_pt: "",   ← short description of the project (English / Portuguese)
+    },
+    { group: "leitao", level: "msc", role: "MSc Student",
+      name: "Margret Folashade Jones",
+      photo: "photos/MSStudent_AL_Margret Folashade Jones.PNG",
+      // bio: "", bio_pt: "",   ← short description of the project (English / Portuguese)
+    },
 
     { group: "leitao", level: "undergrad", role: "Undergraduate Student",
       name: "Anna Carolina Julien",
       photo: "photos/UnderGrad_AL_Anna Carolina Julien.jpeg",
-      bio: "[Short description of this student's project.]" },
+      // bio: "", bio_pt: "",   ← short description of the project (English / Portuguese)
+    },
     { group: "leitao", level: "undergrad", role: "Undergraduate Student",
       name: "Maria Clara Cardoso Sarkis",
       photo: "photos/UnderGrad_AL_Maria Clara Cardoso Sarkis.jpg",
-      bio: "[Short description of this student's project.]" },
+      // bio: "", bio_pt: "",   ← short description of the project (English / Portuguese)
+    },
 
     /* ── Technicians (shared by both groups) ── */
     { level: "staff", role: "Staff",
       name: "Juliana Torini",
       photo: "photos/Staff_Juliana Torini.jpeg",
-      bio: "[Short description of this technician's role.]" }
+      // bio: "", bio_pt: "",   ← short description of the role (English / Portuguese)
+    }
 
     // Reis-de-Oliveira group members go here, e.g.:
     // { group: "oliveira", level: "phd", role: "PhD Student",
     //   name: "[Full name]", photo: "photos/PhDStudent_RO_Full Name.jpg",
-    //   bio: "[Short description of this student's project.]" },
+    //   bio: "Short description of the project.", bio_pt: "Breve descrição do projeto." },
   ],
 
   // Past members / alumni, tagged by the group they belonged to.
@@ -92,23 +106,42 @@ SITE.team = {
     list: [
       { group: "leitao", role: "PhD Student", name: "Fernando Rodrigues Trindade Ferreira",
         photo: "photos/PastMembers/PhD_AL_Fernando Rodrigues Trindade Ferreira.jpg",
-        years: "[Years]", now: "[Now: current position]" },
+        // years: "", now: "", now_pt: "",   ← e.g. years: "2019–2023", now: "Postdoc at …", now_pt: "Pós-doc na …"
+      },
       { group: "leitao", role: "PhD Student", name: "Talita Alvarenga Valdes",
         photo: "photos/PastMembers/PhD_AL_Talita Alvarenga Valdes.jpeg",
-        years: "[Years]", now: "[Now: current position]" },
+        // years: "", now: "", now_pt: "",   ← e.g. years: "2019–2023", now: "Postdoc at …", now_pt: "Pós-doc na …"
+      },
       { group: "leitao", role: "PhD Student", name: "Thiago Brito",
         photo: "photos/PastMembers/PhD_AL_Thiago Brito.jpg",
-        years: "[Years]", now: "[Now: current position]" },
+        // years: "", now: "", now_pt: "",   ← e.g. years: "2019–2023", now: "Postdoc at …", now_pt: "Pós-doc na …"
+      },
 
       { group: "leitao", role: "MSc Student", name: "Isabela Marques",
         photo: "photos/PastMembers/Msc_AL_Isabela Marques.jpg",
-        years: "[Years]", now: "[Now: current position]" },
+        // years: "", now: "", now_pt: "",   ← e.g. years: "2019–2023", now: "Postdoc at …", now_pt: "Pós-doc na …"
+      },
       { group: "leitao", role: "MSc Student", name: "Leonardo Tarczewski",
         photo: "photos/PastMembers/MSC_AL_Leonardo Tarczewski.png",
-        years: "[Years]", now: "[Now: current position]" },
+        // years: "", now: "", now_pt: "",   ← e.g. years: "2019–2023", now: "Postdoc at …", now_pt: "Pós-doc na …"
+      },
       { group: "leitao", role: "MSc Student", name: "Sara Franchin Duarte de Souza",
         photo: "photos/PastMembers/Msc_AL_Sara Franchin Duarte de Souza.jpg",
-        years: "[Years]", now: "[Now: current position]" }
+        // years: "", now: "", now_pt: "",   ← e.g. years: "2019–2023", now: "Postdoc at …", now_pt: "Pós-doc na …"
+      },
+
+      { group: "leitao", role: "", name: "Débora Roncato Magnani",
+        photo: "",
+        // years: "", now: "", now_pt: "",   ← e.g. years: "2019–2023", now: "Postdoc at …", now_pt: "Pós-doc na …"
+      },
+      { group: "leitao", role: "", name: "Vinicius Gonçalves Satkauskas",
+        photo: "",
+        // years: "", now: "", now_pt: "",   ← e.g. years: "2019–2023", now: "Postdoc at …", now_pt: "Pós-doc na …"
+      },
+      { group: "leitao", role: "", name: "Júlia Maia Olivesi",
+        photo: "",
+        // years: "", now: "", now_pt: "",   ← e.g. years: "2019–2023", now: "Postdoc at …", now_pt: "Pós-doc na …"
+      }
     ]
   }
 };

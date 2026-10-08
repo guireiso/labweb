@@ -33,4 +33,6 @@ Text in [square brackets] is a placeholder, shown in amber until replaced.
 2. Settings → Pages → Deploy from a branch → `main` / root.
 3. The site is served at `https://<user>.github.io/<repo>/`. Links use hashes (`#/groups`), so no server rules are needed.
 
+After each update, change the number in `?v=…` in `index.html` (e.g. to today's date) so visitors' browsers fetch the new files instead of old cached ones.
+
 File names are case-sensitive on GitHub: keep the exact spelling used in the data files.

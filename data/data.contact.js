@@ -14,17 +14,17 @@ SITE.contact = {
     {
       icon: "pin",
       label: "Location",
-      html: "[Room, Building]<br>[Department]<br>[University]<br>[City, Country]"
+      html: "Lab 8, São Carlos Institute of Chemistry (IQSC-USP)<br>400 Trabalhador São-carlense Avenue, Parque Arnold Schimidt<br>São Carlos, SP 13566-590, Brazil"
     },
     {
       icon: "mail",
       label: "General inquiries",
-      html: "[general inquiries email]"
+      html: ""   // ← add the lab's general e-mail here, e.g. "cdg@iqsc.usp.br" (empty = row hidden)
     },
     {
       icon: "at",
       label: "Twitter/X",
-      html: "[@handle]"
+      html: "<a href=\"https://x.com/reisdeoliveiraG\" target=\"_blank\" rel=\"noopener\">@reisdeoliveiraG</a>"
     },
     {
       icon: "flask",
@@ -33,20 +33,25 @@ SITE.contact = {
     }
   ],
 
-  // ⚠ Placeholder badges — replace with the lab's real funding
-  // agencies/affiliations (e.g. FAPESP, CNPq, CAPES, USP, if applicable).
   funding: {
     heading: "Funding & Affiliations",
-    badges: ["[Funding agency]", "[Funding agency]", "[Affiliation]"]
+    badges: ["FAPESP", "CAPES", "CNPq", "USP", "IQSC"]
   },
 
   form: {
+    // ── To make this form send e-mails ─────────────────────────────
+    // GitHub Pages only serves files, so the messages need a free form
+    // service. 1) Create an account at https://formspree.io with the
+    // e-mail that should receive the messages. 2) Create a form there and
+    // copy its address (looks like "https://formspree.io/f/abcdwxyz").
+    // 3) Paste it below. While it is empty, the button only shows a note.
+    endpoint: "",
     heading: "Send a message",
     fields: [
-      { label: "Name",    type: "text",     placeholder: "Your full name" },
-      { label: "Email",   type: "email",    placeholder: "your@email.com" },
-      { label: "Group of interest", type: "text", isGroup: true, placeholder: "Reis-de-Oliveira / Leitão / Not sure" },
-      { label: "Message", type: "textarea", placeholder: "Tell us about your interest…" }
+      { name: "name",    label: "Name",    type: "text",     placeholder: "Your full name" },
+      { name: "email",   label: "Email",   type: "email",    placeholder: "your@email.com" },
+      { name: "group",   label: "Group of interest", type: "text", isGroup: true, placeholder: "Reis-de-Oliveira / Leitão / Not sure" },
+      { name: "message", label: "Message", type: "textarea", placeholder: "Tell us about your interest…" }
     ],
     submitLabel: "Send Message →"
   }

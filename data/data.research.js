@@ -35,15 +35,21 @@ SITE.research = {
     },
     {
       groups: ["leitao"],
-      title: "Cellular effects of drugs",
-      text: "In cell culture models we follow how cells respond to treatment, using viability assays, flow cytometry and microscopy.",
-      tags: ["Viability assays", "Flow cytometry", "Microscopy"]
+      title: "Cheminformatics",
+      text: "Molecular modeling and docking of ligands into protein targets, to decide which compounds are worth synthesizing and testing.",
+      tags: ["Molecular modeling", "Docking", "Virtual screening"]
     },
     {
       groups: ["leitao"],
-      title: "Drug modification and synthesis",
-      text: "We design and synthesize analogues to make a compound’s mechanism more selective, based on what the proteomic and cellular data show.",
-      tags: ["Drug synthesis", "Drug modification", "Selectivity"]
+      title: "Medicinal chemistry",
+      text: "We design and optimize bioactive molecules guided by structure–activity relationships, taking hit compounds to optimized candidates.",
+      tags: ["Drug design", "SAR", "Synthesis"]
+    },
+    {
+      groups: ["leitao"],
+      title: "Cell-based assays",
+      text: "Cytotoxicity and mechanism of action in cancer cell lines, including the PI3K-AKT-mTOR pathway and mitochondrial function, using viability assays, flow cytometry and microscopy.",
+      tags: ["Cytotoxicity", "PI3K-AKT-mTOR", "Mitochondria"]
     },
     {
       groups: ["oliveira", "leitao"],

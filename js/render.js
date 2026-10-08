@@ -122,50 +122,64 @@
       return '<div class="lvl"><h4>' + esc(l.label) + '</h4><ul class="people">' + list.map(person).join('') + '</ul></div>';
     }).join('');
     var alumni = ((SITE.team.alumni || {}).list || []).filter(function (a) { return a.group === g.key; });
-    var orcid = c.orcid && !/^0000-0000-0000-0000$/.test(c.orcid) ? '<a href="https://orcid.org/' + esc(c.orcid) + '" target="_blank" rel="noopener">ORCID ' + esc(c.orcid) + '</a>' : '<span class="ph">' + esc(U().orcidPh) + '</span>';
-    var email = /@/.test(c.email || '') && !/^\[/.test(c.email) ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>' : ph(esc(c.email || U().emailPh));
+    // anything missing or still a [placeholder] is simply left out of the profile
+    function real(v) { return v && !/^\[/.test(v) && !/^0000-0000-0000-0000$/.test(v); }
+    function list(a) { return (a || []).filter(real); }
+    var links = [];
+    if (real(c.email) && /@/.test(c.email)) links.push('<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + '</a>');
+    if (real(c.orcid)) links.push('<a href="https://orcid.org/' + esc(c.orcid) + '" target="_blank" rel="noopener">ORCID ' + esc(c.orcid) + '</a>');
+    if (real(c.lattes)) links.push('<a href="' + esc(c.lattes) + '" target="_blank" rel="noopener">' + esc(U().lattes) + '</a>');
+    if (real(c.scholarUrl)) links.push('<a href="' + esc(c.scholarUrl) + '" target="_blank" rel="noopener">' + esc(c.scholarLabel || U().scholarDefault) + '</a>');
+    var phil = list(pi.researchPhilosophy), bio = list(pi.biography), hl = list(pi.academicHighlights);
     $('profile').setAttribute('style', '--g:' + g.color + ';--gs:' + g.colorSoft);
     $('profile').innerHTML =
       '<div class="pf-side">' + avatar(pi, 'av-xl') + '<h3>' + esc(pi.name) + (pi.degree ? ', ' + esc(pi.degree) : '') + '</h3><p class="role">' + esc(pi.role) + ' · ' + esc(g.name) + '</p>' +
-      '<ul class="contact-mini"><li>' + email + '</li><li>' + orcid + '</li><li><span class="ph" title="' + esc(U().scholarTip) + '">' + esc(c.scholarLabel || U().scholarDefault) + '</span></li></ul>' +
-      '<span class="btn btn-ghost disabled" title="' + esc(U().cvTip) + '">' + esc(pi.cvButtonLabel || U().downloadCv).toUpperCase() + '</span></div>' +
+      (links.length ? '<ul class="contact-mini">' + links.map(function (l) { return '<li>' + l + '</li>'; }).join('') + '</ul>' : '') +
+      '</div>' +
       '<div class="pf-main"><p class="tagline big">' + ph(g.tagline) + '</p><ul class="tags">' + g.focusAreas.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' +
-      '<h4>' + esc(U().researchPhilosophy) + '</h4>' + pi.researchPhilosophy.map(function (p) { return '<p>' + ph(p) + '</p>'; }).join('') +
-      '<h4>' + esc(U().biography) + '</h4>' + pi.biography.map(function (p) { return '<p>' + ph(p) + '</p>'; }).join('') +
-      '<h4>' + esc(U().academicHighlights) + '</h4><ul class="hl-list">' + pi.academicHighlights.map(function (p) { return '<li>' + ph(esc(p)) + '</li>'; }).join('') + '</ul></div>' +
+      (phil.length ? '<h4>' + esc(U().researchPhilosophy) + '</h4>' + phil.map(function (p) { return '<p>' + p + '</p>'; }).join('') : '') +
+      (bio.length ? '<h4>' + esc(U().biography) + '</h4>' + bio.map(function (p) { return '<p>' + p + '</p>'; }).join('') : '') +
+      (hl.length ? '<h4>' + esc(U().academicHighlights) + '</h4><ul class="hl-list">' + hl.map(function (p) { return '<li>' + esc(p) + '</li>'; }).join('') + '</ul>' : '') + '</div>' +
       '<div class="pf-team"><h4 class="team-h">' + esc(U().team) + '</h4>' + (roster || '<p class="empty">' + esc(U().noMembers) + '</p>') +
       (staff.length ? '<div class="lvl shared"><h4>' + esc(U().staffShared) + '</h4><ul class="people">' + staff.map(person).join('') + '</ul></div>' : '') +
       '<h4 class="team-h">' + esc((SITE.team.alumni || {}).heading || 'Alumni') + '</h4>' +
-      (alumni.length ? '<ul class="alumni">' + alumni.map(function (a) { return '<li>' + avatar(a, 'av-sm') + '<div><b>' + esc(a.name) + '</b> · ' + esc(a.role) + ' · ' + ph(esc(a.years || '')) + '<span>' + ph(esc(a.now || '')) + '</span></div></li>'; }).join('') + '</ul>' : '<p class="empty">' + esc(U().noAlumni) + '</p>') + '</div>';
+      (alumni.length ? '<ul class="alumni">' + alumni.map(function (a) { return '<li>' + avatar(a, 'av-sm') + '<div><b>' + esc(a.name) + '</b>' + [a.role, a.years].filter(Boolean).map(function (x) { return ' · ' + ph(esc(x)); }).join('') + (a.now ? '<span>' + ph(esc(a.now)) + '</span>' : '') + '</div></li>'; }).join('') + '</ul>' : '<p class="empty">' + esc(U().noAlumni) + '</p>') + '</div>';
   }
-  function person(m) { return '<li class="person" data-name="' + esc(m.name) + '">' + avatar(m, 'av-sm') + '<div><b>' + esc(m.name) + '</b><span>' + esc(m.role) + '</span><p>' + ph(esc(m.bio)) + '</p></div></li>'; }
+  function person(m) { return '<li class="person" data-name="' + esc(m.name) + '">' + avatar(m, 'av-sm') + '<div><b>' + esc(m.name) + '</b><span>' + esc(m.role) + '</span>' + (m.bio ? '<p>' + ph(esc(m.bio)) + '</p>' : '') + '</div></li>'; }
 
   /* ── PUBLICATIONS ── */
   function renderPublications() {
-    var p = SITE.publications;
+    var p = SITE.publications, lastYear = null, types = { review: U().typeReview, chapter: U().typeChapter, proceedings: U().typeProceedings };
+    var items = (p.items || []).slice().sort(function (a, b) { return b.year - a.year; });
     $('publications').innerHTML = head(p.tag, p.heading, p.intro) +
       '<div class="pubbar rv d3">' + filterPills('pubFilter') + '<label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>' +
       '<input id="pubSearch" type="search" placeholder="' + esc(p.searchPlaceholder) + '" aria-label="' + esc(U().searchLabel) + '"></label></div>' +
-      '<ol class="pubs" id="pubList">' + p.items.map(function (it) {
-        var authors = ph(it.authors).replace(/\{\{HIGHLIGHT\}\}/g, '<span class="me">').replace(/\{\{\/HIGHLIGHT\}\}/g, '</span>');
-        var hay = (it.year + ' ' + it.journalName + ' ' + it.title + ' ' + it.authors).toLowerCase().replace(/\{\{\/?highlight\}\}|<[^>]+>/g, '');
-        var doi = /^\[/.test(it.doi) ? ph(esc(it.doi)) : '<a href="https://doi.org/' + esc(it.doi) + '" target="_blank" rel="noopener">doi:' + esc(it.doi) + '</a>';
-        return '<li class="pub" data-groups="' + it.groups.join(' ') + '" data-hay="' + esc(hay) + '"><div class="pub-meta"><span class="year">' + it.year + '</span>' +
-          '<span class="badge badge-' + esc(it.journalKey) + '">' + ph(esc(it.journalName)) + '</span>' + dots(it.groups) + '</div>' +
-          '<h3>' + ph(esc(it.title)) + '</h3><p class="authors">' + authors + '</p><p class="doi">' + doi + '</p></li>';
-      }).join('') + '</ol><p class="empty" id="pubEmpty" hidden>' + esc(U().noPubs) + '</p>';
+      '<p class="pubcount" id="pubCount" aria-live="polite"></p>' +
+      '<ol class="pubs" id="pubList">' + items.map(function (it) {
+        var authors = ph(esc(it.authors)).replace(/\{\{HIGHLIGHT\}\}/g, '<span class="me">').replace(/\{\{\/HIGHLIGHT\}\}/g, '</span>');
+        var journal = it.journal || it.journalName || '';
+        var hay = (it.year + ' ' + journal + ' ' + it.title + ' ' + it.authors).toLowerCase().replace(/\{\{\/?highlight\}\}|<[^>]+>/g, '');
+        var doi = !it.doi ? '' : /^\[/.test(it.doi) ? ph(esc(it.doi)) : '<a href="https://doi.org/' + esc(it.doi) + '" target="_blank" rel="noopener">doi:' + esc(it.doi) + '</a>';
+        var yr = it.year !== lastYear ? '<li class="pub-year" data-year="' + it.year + '"><span>' + it.year + '</span></li>' : '';
+        lastYear = it.year;
+        return yr + '<li class="pub" data-year="' + it.year + '" data-groups="' + it.groups.join(' ') + '" data-hay="' + esc(hay) + '">' +
+          '<div class="pub-meta">' + dots(it.groups) + (types[it.type] ? '<span class="badge badge-type">' + esc(types[it.type]) + '</span>' : '') + '</div>' +
+          '<h3>' + ph(esc(it.title)) + '</h3><p class="authors">' + authors + '</p>' +
+          '<p class="cite">' + (journal ? '<em>' + ph(esc(journal)) + '</em>' : '') + (it.citation ? ' ' + esc(it.citation) : '') + '</p>' +
+          (doi ? '<p class="doi">' + doi + '</p>' : '') + '</li>';
+      }).join('') + '</ol><p class="empty" id="pubEmpty" hidden>' + esc(U().noPubs) + '</p><nav class="pager" id="pubPager" aria-label="' + esc(U().pagesAria) + '" hidden></nav>';
   }
 
   /* ── CONTACT ── */
   function renderContact() {
     var c = SITE.contact;
     $('contact').innerHTML = head(c.tag, c.heading, c.intro) + '<div class="contact-grid">' +
-      '<div class="rv d2"><ul class="rows">' + c.rows.map(function (r) { return '<li>' + icon(r.icon) + '<div><h4>' + esc(r.label) + '</h4><p>' + ph(r.html) + '</p></div></li>'; }).join('') + '</ul>' +
+      '<div class="rv d2"><ul class="rows">' + c.rows.filter(function (r) { return r.html; }).map(function (r) { return '<li>' + icon(r.icon) + '<div><h4>' + esc(r.label) + '</h4><p>' + ph(r.html) + '</p></div></li>'; }).join('') + '</ul>' +
       '<h4 class="fund-h">' + esc(c.funding.heading) + '</h4><ul class="badges">' + c.funding.badges.map(function (b) { return '<li>' + ph(esc(b)) + '</li>'; }).join('') + '</ul></div>' +
       '<form class="form card rv d3" id="contactForm" novalidate><h3>' + esc(c.form.heading) + '</h3>' + c.form.fields.map(function (f, i) {
-        var id = 'cf' + i, ctl = f.type === 'textarea' ? '<textarea id="' + id + '" rows="5" placeholder="' + esc(f.placeholder) + '"></textarea>' :
-          (f.isGroup ? '<select id="' + id + '"><option value="">' + esc(U().notSure) + '</option>' + SITE.groups.map(function (g) { return '<option>' + esc(g.name) + '</option>'; }).join('') + '</select>' :
-          '<input id="' + id + '" type="' + esc(f.type) + '" placeholder="' + esc(f.placeholder) + '">');
+        var id = 'cf' + i, nm = ' name="' + esc(f.name || ('field' + i)) + '"', ctl = f.type === 'textarea' ? '<textarea id="' + id + '"' + nm + ' rows="5" placeholder="' + esc(f.placeholder) + '"></textarea>' :
+          (f.isGroup ? '<select id="' + id + '"' + nm + '><option value="">' + esc(U().notSure) + '</option>' + SITE.groups.map(function (g) { return '<option>' + esc(g.name) + '</option>'; }).join('') + '</select>' :
+           '<input id="' + id + '"' + nm + ' type="' + esc(f.type) + '" placeholder="' + esc(f.placeholder) + '">');
         return '<label for="' + id + '">' + esc(f.label) + '</label>' + ctl;
       }).join('') + '<button class="btn btn-primary" type="submit">' + esc(c.form.submitLabel).toUpperCase() + '</button><p class="form-note" id="formNote" aria-live="polite"></p></form></div>';
   }

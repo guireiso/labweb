@@ -34,6 +34,23 @@ SITE.news = {
 
   posts: [
     {
+      slug: "leitao-cancer-on-target-2025",
+      date: "2025-10-02",
+      tags: ["Talk"],
+      tags_pt: ["Palestra"],
+      image: "https://cdg.iqsc.usp.br/files/2025/09/Palestra_Prof_Andrei-e1757502244178.jpeg",
+      title: "Andrei Leitão speaks at Cancer On Target 2025",
+      title_pt: "Andrei Leitão fala no Cancer On Target 2025",
+      summary: "A talk on in silico and in vitro drug discovery at the Workshop on Molecular Oncology and Drug Discovery, FZEA/USP.",
+      summary_pt: "Uma palestra sobre descoberta de fármacos in silico e in vitro no Workshop on Molecular Oncology and Drug Discovery, na FZEA/USP.",
+      body: [
+        "Andrei Leitão gave the talk “The multiple faces of drug discovery: in silico and in vitro efforts” at Cancer On Target 2025, the Workshop on Molecular Oncology and Drug Discovery held at FZEA/USP."
+      ],
+      body_pt: [
+        "Andrei Leitão apresentou a palestra “The multiple faces of drug discovery: in silico and in vitro efforts” no Cancer On Target 2025, o Workshop on Molecular Oncology and Drug Discovery realizado na FZEA/USP."
+      ]
+    },
+    {
       slug: "new-website",
       date: "2026-10-05",
       tags: ["Lab"],
@@ -51,42 +68,46 @@ SITE.news = {
         "O Chemical Discovery Group agora tem um site próprio. Aqui você encontra o que pesquisamos, quem faz parte do laboratório, nossas publicações e como falar com a gente.",
         "Vamos usar esta página para contar o que acontece no laboratório: artigos novos, palestras, pessoas chegando e vagas abertas. Se você pensa em fazer iniciação científica, mestrado, doutorado ou pós-doutorado com a gente, a página de Contato é um bom ponto de partida."
       ]
-    },
-    {
-      slug: "example-publication",
-      date: "2026-09-18",
-      tags: ["Publication"],
-      tags_pt: ["Publicação"],
-      image: "",
-      title: "[Example post: new paper published]",
-      title_pt: "[Exemplo de post: novo artigo publicado]",
-      summary: "[One or two sentences about the paper, written for a general scientific audience.]",
-      summary_pt: "[Uma ou duas frases sobre o artigo, para um público científico geral.]",
-      body: [
-        "[First paragraph: what question the paper answers and why it matters.]",
-        "[Second paragraph: the main finding, who led the work, and a link to the paper, e.g. <a href=\"https://doi.org/...\">doi:...</a>]"
-      ],
-      body_pt: [
-        "[Primeiro parágrafo: qual pergunta o artigo responde e por que ela importa.]",
-        "[Segundo parágrafo: o principal resultado, quem liderou o trabalho e o link para o artigo.]"
-      ]
-    },
-    {
-      slug: "example-team",
-      date: "2026-08-25",
-      tags: ["Team"],
-      tags_pt: ["Equipe"],
-      image: "",
-      title: "[Example post: welcome to new members]",
-      title_pt: "[Exemplo de post: boas-vindas aos novos integrantes]",
-      summary: "[Who joined the lab this semester and what they will work on.]",
-      summary_pt: "[Quem chegou ao laboratório neste semestre e no que vai trabalhar.]",
-      body: [
-        "[A short paragraph introducing each new member and their project.]"
-      ],
-      body_pt: [
-        "[Um parágrafo curto apresentando cada novo integrante e o seu projeto.]"
-      ]
     }
+
+    /* ── TEMPLATES (commented out, not shown on the site) ──────────
+       To publish one: copy it ABOVE this note, remove the "// " at the
+       start of each line, fill in the text and change slug and date. */
+    // {
+    //   slug: "example-publication",
+    //   date: "2026-09-18",
+    //   tags: ["Publication"],
+    //   tags_pt: ["Publicação"],
+    //   image: "",
+    //   title: "[Example post: new paper published]",
+    //   title_pt: "[Exemplo de post: novo artigo publicado]",
+    //   summary: "[One or two sentences about the paper, written for a general scientific audience.]",
+    //   summary_pt: "[Uma ou duas frases sobre o artigo, para um público científico geral.]",
+    //   body: [
+    //     "[First paragraph: what question the paper answers and why it matters.]",
+    //     "[Second paragraph: the main finding, who led the work, and a link to the paper, e.g. <a href=\"https://doi.org/...\">doi:...</a>]"
+    //   ],
+    //   body_pt: [
+    //     "[Primeiro parágrafo: qual pergunta o artigo responde e por que ela importa.]",
+    //     "[Segundo parágrafo: o principal resultado, quem liderou o trabalho e o link para o artigo.]"
+    //   ]
+    // },
+    // {
+    //   slug: "example-team",
+    //   date: "2026-08-25",
+    //   tags: ["Team"],
+    //   tags_pt: ["Equipe"],
+    //   image: "",
+    //   title: "[Example post: welcome to new members]",
+    //   title_pt: "[Exemplo de post: boas-vindas aos novos integrantes]",
+    //   summary: "[Who joined the lab this semester and what they will work on.]",
+    //   summary_pt: "[Quem chegou ao laboratório neste semestre e no que vai trabalhar.]",
+    //   body: [
+    //     "[A short paragraph introducing each new member and their project.]"
+    //   ],
+    //   body_pt: [
+    //     "[Um parágrafo curto apresentando cada novo integrante e o seu projeto.]"
+    //   ]
+    // }
   ]
 };

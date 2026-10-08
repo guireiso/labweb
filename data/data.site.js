@@ -51,9 +51,9 @@ SITE.pathway = {
     { group: "oliveira", icon: "proteomics", title: "Targets and mechanism",
       text: "Large-scale proteomics, chemoproteomics and XL-MS show which proteins a compound engages and what shifts across the proteome. Systems biology and the analysis pipelines we develop turn those changes into a mechanism.",
       tags: ["Proteomics", "Chemoproteomics", "XL-MS", "Systems biology"] },
-    { group: "leitao", icon: "assay", title: "Cellular response and compound design",
-      text: "Viability assays, flow cytometry and microscopy show how cells respond to treatment. With that information we modify and synthesize new analogues to make the compound act more selectively.",
-      tags: ["Cell-based assays", "Flow cytometry", "Microscopy", "Drug synthesis"] }
+    { group: "leitao", icon: "assay", title: "From in silico to in vitro",
+      text: "Molecular modeling and docking point to the compounds worth making; medicinal chemistry designs and optimizes them; and cell-based assays show what they do to cells, from cytotoxicity to effects on pathways such as PI3K-AKT-mTOR.",
+      tags: ["Cheminformatics", "Medicinal chemistry", "Cell-based assays"] }
   ],
   link: { label: "See our research", page: "research" }
 };
@@ -74,8 +74,8 @@ SITE.approachCards = [
     text: "Cross-linking mass spectrometry captures protein interactions and conformations; network analysis places them in the context of the drug’s mechanism." },
   { icon: "assay", title: "Cell-based assays",
     text: "Viability assays, flow cytometry and microscopy in cell culture models, to test each hypothesis in a living system." },
-  { icon: "compute", title: "Drug modification & synthesis",
-    text: "Design and synthesis of analogues guided by the mechanistic data, aiming for more selective compounds." }
+  { icon: "compute", title: "Cheminformatics & medicinal chemistry",
+    text: "Docking and molecular modeling to prioritize compounds, and structure–activity relationships to design and optimize them." }
 ];
 
 // Home · the molecule section

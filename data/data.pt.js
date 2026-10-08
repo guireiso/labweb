@@ -35,8 +35,8 @@ const SITE_PT = {
 
     hero: {
       label: ["Proteômica estrutural", "Descoberta de fármacos", "Ensaios celulares"],
-      titleHtml: "Como os fármacos agem e como <em style=\"white-space:nowrap\">melhorá-los</em>",
-      paragraph: "Estudamos o que os fármacos fazem dentro das células: a quais proteínas se ligam, o que muda a partir daí e como a célula responde. Combinamos proteômica, quimioproteômica e XL-MS com ensaios celulares e química medicinal, e usamos o que aprendemos para desenhar compostos melhores.",
+      titleHtml: "Como os fármacos atuam e como <em style=\"white-space:nowrap\">melhorá-los</em>",
+      paragraph: "Estudamos o que os fármacos fazem dentro das células: em quais proteínas se ligam, os mecanismos disparados e a resposta celular. Combinamos proteômica avançada com ensaios celulares e química medicinal, e usamos o que aprendemos para desenhar compostos mais eficientes.",
       buttons: [
         { label: "Conheça a equipe" },
         { label: "Publicações" }
@@ -49,11 +49,11 @@ const SITE_PT = {
       intro: "Nenhuma técnica sozinha conta a história inteira de um fármaco. Partimos das proteínas com que ele interage, acompanhamos a resposta das células e levamos esses resultados de volta para a química.",
       steps: [
         { title: "Alvos e mecanismo",
-          text: "Proteômica em larga escala, quimioproteômica e XL-MS mostram com quais proteínas um composto interage e o que se altera no proteoma. A biologia de sistemas e os pipelines de análise que desenvolvemos ajudam a juntar essas peças em um mecanismo.",
+          text: "Proteômica em larga escala, quimioproteômica e XL-MS mostram com quais proteínas um composto interage e o que se altera no proteoma. A biologia de sistemas e os pipelines de análise que desenvolvemos juntam essas peças em um mecanismo.",
           tags: ["Proteômica", "Quimioproteômica", "XL-MS", "Biologia de sistemas"] },
-        { title: "Resposta celular e desenho de compostos",
-          text: "Ensaios de viabilidade, citometria de fluxo e microscopia mostram como as células respondem ao tratamento. A partir daí, modificamos e sintetizamos novos análogos para que o composto aja de forma mais seletiva.",
-          tags: ["Ensaios celulares", "Citometria de fluxo", "Microscopia", "Síntese de fármacos"] }
+        { title: "Do in silico ao in vitro",
+          text: "A modelagem molecular e o docking apontam quais compostos vale a pena produzir; a química medicinal os planeja e otimiza; e os ensaios celulares mostram o que eles fazem com as células, da citotoxicidade a efeitos metabólicos.",
+          tags: ["Quimioinformática", "Química medicinal", "Ensaios celulares"] }
       ],
       link: { label: "Veja nossa pesquisa" }
     },
@@ -67,19 +67,19 @@ const SITE_PT = {
 
     approachCards: [
       { title: "Proteômica e quimioproteômica",
-        text: "Espectrometria de massas quantitativa de milhares de proteínas de uma vez, para descobrir a que um composto se liga e como o proteoma responde." },
+        text: "Análise de milhares de proteínas de uma vez, para descobrir os alvos farmacológicos e resposta do proteoma." },
       { title: "XL-MS e biologia de sistemas",
-        text: "A espectrometria de massas com ligação cruzada registra interações e conformações de proteínas; a análise de redes coloca esses dados no contexto do mecanismo do fármaco." },
+        text: "A proteômica estrutural registra interações e conformações de proteínas; a análise de redes coloca esses dados no contexto do mecanismo do fármaco." },
       { title: "Ensaios celulares",
         text: "Ensaios de viabilidade, citometria de fluxo e microscopia em modelos de cultura celular, para testar cada hipótese em um sistema vivo." },
-      { title: "Modificação e síntese de fármacos",
-        text: "Planejamento e síntese de análogos orientados pelos dados de mecanismo, em busca de compostos mais seletivos." }
+      { title: "Quimioinformática e química medicinal",
+        text: "Docking e modelagem molecular para priorizar compostos, e relações estrutura–atividade para planejá-los e otimizá-los." }
     ],
 
     moleculeSection: {
       tag: "Química",
       heading: "Do mecanismo <em>à molécula</em>",
-      text: "Saber como um composto age, e o que ele faz com as células, indica quais partes da molécula vale a pena mudar. Cada novo análogo volta a passar pelos mesmos experimentos.",
+      text: "Saber como um composto age, e o que ele faz com as células, indica quais partes da molécula vale a pena mudar. Cada novo análogo, uma nova história.",
       buttons: [
         { label: "Pesquisa" },
         { label: "Contato" }
@@ -113,12 +113,15 @@ const SITE_PT = {
         { title: "Biologia de sistemas e software",
           text: "Desenvolvemos softwares e pipelines que levam os dados brutos de proteômica até a interpretação biológica, e usamos análise de redes para integrar resultados de experimentos diferentes.",
           tags: ["Biologia de sistemas", "Software", "Pipelines de proteômica"] },
-        { title: "Efeitos dos fármacos nas células",
-          text: "Em modelos de cultura celular, acompanhamos como as células respondem ao tratamento, com ensaios de viabilidade, citometria de fluxo e microscopia.",
-          tags: ["Ensaios de viabilidade", "Citometria de fluxo", "Microscopia"] },
-        { title: "Modificação e síntese de fármacos",
-          text: "Planejamos e sintetizamos análogos para tornar o mecanismo de um composto mais seletivo, com base no que os dados proteômicos e celulares mostram.",
-          tags: ["Síntese de fármacos", "Modificação de fármacos", "Seletividade"] },
+        { title: "Quimioinformática",
+          text: "Modelagem molecular e docking de ligantes em alvos proteicos, para decidir quais compostos vale a pena sintetizar e testar.",
+          tags: ["Modelagem molecular", "Docking", "Triagem virtual"] },
+        { title: "Química medicinal",
+          text: "Planejamos e otimizamos moléculas bioativas com base nas relações estrutura–atividade, levando compostos hit a candidatos otimizados.",
+          tags: ["Desenho de fármacos", "SAR", "Síntese"] },
+        { title: "Ensaios celulares",
+          text: "Citotoxicidade e mecanismo de ação em linhagens de células tumorais, incluindo a via PI3K-AKT-mTOR e a função mitocondrial, com ensaios de viabilidade, citometria de fluxo e microscopia.",
+          tags: ["Citotoxicidade", "PI3K-AKT-mTOR", "Mitocôndria"] },
         { title: "Do mecanismo a um composto melhor",
           text: "Os projetos se conectam: a proteômica aponta o mecanismo, os ensaios celulares o testam e os novos análogos voltam a passar pelas duas etapas. A cada rodada, o composto fica mais refinado.",
           tags: ["Mecanismo de ação", "Modelos celulares", "Desenho de fármacos"] }
@@ -132,40 +135,53 @@ const SITE_PT = {
         focusAreas: ["Proteômica e quimioproteômica", "XL-MS", "Biologia de sistemas e software"],
         pi: {
           role: "Pesquisador principal",
-          shortBio: "Guilherme coordena um grupo que trabalha com proteômica em larga escala, quimioproteômica, XL-MS e biologia de sistemas, além de desenvolver softwares e pipelines de proteômica. O objetivo é entender como os fármacos agem e como melhorá-los.",
+          shortBio: "Guilherme é Professor Doutor do Instituto de Química de São Carlos (IQSC-USP). Seu grupo usa proteômica estrutural, quimioproteômica, XL-MS e biologia de sistemas para estudar como os fármacos alteram as redes de interação proteína–proteína e proteína–fármaco.",
           contact: { scholarLabel: "Ver perfil ↗" },
-          cvButtonLabel: "Baixar CV ↓",
           researchPhilosophy: [
-            "Conhecer o alvo de um fármaco é só o começo. Queremos saber tudo o que ele muda na célula. A proteômica em larga escala, a quimioproteômica e a XL-MS, junto com a biologia de sistemas e os softwares que escrevemos, permitem olhar o proteoma inteiro com resolução molecular. Somadas aos modelos celulares, elas nos mostram como os fármacos agem e onde podem ser melhorados."
+            "Saber quanto existe de cada proteína conta só parte da história. Doenças e tratamentos também mudam como as proteínas interagem, a quais fármacos se ligam e como são modificadas. Estudamos essa dinâmica funcional e estrutural do proteoma com quimioproteômica, espectrometria de massas com ligação cruzada (XL-MS) e análise de modificações pós-traducionais, do preparo de amostra ao software que interpreta os dados. O objetivo é entender como os fármacos agem, encontrar novos alvos terapêuticos e vias moleculares, e apontar oportunidades de reposicionamento de fármacos.",
+            "O trabalho integra química medicinal, bioquímica, biologia molecular e biologia de sistemas."
           ],
           biography: [
-            "Guilherme fez o doutorado com foco em proteômica e depois se especializou em análise integrativa de dados em larga escala aplicada à descoberta de fármacos. Hoje o grupo reúne biólogos, bioquímicos e cientistas da computação interessados em entender como os fármacos modulam o proteoma."
+            "Guilherme é bacharel em Ciências Biológicas e doutor em Genética e Biologia Molecular (2024) pela Universidade Estadual de Campinas (UNICAMP). Na iniciação científica e no doutorado, sob orientação de Daniel Martins-de-Souza no Laboratório de Neuroproteômica, usou a proteômica baseada em espectrometria de massas para estudar a bioquímica de distúrbios psiquiátricos e de seus tratamentos, e desenvolveu o OmicScope, ferramenta para análise integrativa de dados ômicos.",
+            "Depois, foi responsável pelo Laboratório de Espectrometria de Massas do Centro Infantil Boldrini e pesquisador visitante do Dalton Lab, conduzindo projetos de proteômica em larga escala e estrutural (cross-linking e quimioproteômica), metabolômica e biologia de sistemas. Em 2026 tornou-se Professor Doutor do IQSC-USP."
           ],
           academicHighlights: [
-            "[Prêmio / financiamento, ano]",
-            "[Palestras convidadas em congressos]",
-            "[Atuação como revisor ou editor de periódicos]"
+            "1º lugar, Prêmio Destaque do Ano no Artigo Científico João Pedro Mariz (pós-doutorado), Instituto de Biologia, UNICAMP (2026)",
+            "2º lugar, Prêmio Destaque do Ano no Artigo Científico João Pedro Mariz (pós-graduação), Instituto de Biologia, UNICAMP (2026)",
+            "Menção honrosa, Prêmio Tese Destaque UNICAMP 2024 (2025)",
+            "Melhor tese de 2024 do Programa de Pós-Graduação em Genética e Biologia Molecular, UNICAMP (2025)",
+            "Melhor apresentação oral de pós-doutorado em proteômica, VI Congresso BrProt (2024)",
+            "1º lugar, pôster em bioinformática, V GBMeeting (2023)",
+            "Revisor do periódico npj Schizophrenia"
           ]
         }
       },
       {
         name: "Grupo Leitão",
-        tagline: "Ensaios celulares e química medicinal para entender o que os fármacos fazem com as células e torná-los mais seletivos",
-        focusAreas: ["Ensaios celulares", "Citometria de fluxo e microscopia", "Modificação e síntese de fármacos"],
+        tagline: "Descoberta de fármacos do in silico ao in vitro: quimioinformática, química medicinal e ensaios celulares para encontrar e avaliar novos compostos",
+        focusAreas: ["Quimioinformática", "Química medicinal", "Ensaios celulares"],
         pi: {
           role: "Pesquisador principal",
-          shortBio: "[Bio curta, de 2 a 3 frases, para o cartão do grupo e o topo do perfil. O grupo do Andrei estuda os efeitos dos fármacos nas células e modifica e sintetiza fármacos para tornar seus mecanismos mais seletivos.]",
-          contact: { email: "[e-mail de contato]", scholarLabel: "Ver perfil ↗" },
-          cvButtonLabel: "Baixar CV ↓",
+          shortBio: "Andrei é professor associado do Instituto de Química de São Carlos (IQSC-USP) e bolsista de produtividade em pesquisa do CNPq. Seu grupo leva novos compostos do computador à célula, combinando quimioinformática, química medicinal e ensaios celulares.",
+          contact: { scholarLabel: "Ver perfil ↗" },
           researchPhilosophy: [
-            "[Parágrafo sobre a forma de pesquisar do grupo, por exemplo, como os ensaios celulares e a síntese de análogos se combinam para tornar o mecanismo de um fármaco mais seletivo.]"
+            "Descoberta de fármacos, do in silico ao in vitro. Começamos no computador: a modelagem molecular e o docking indicam quais compostos vale a pena produzir. A química medicinal, guiada pelas relações estrutura–atividade, transforma hits em moléculas otimizadas. Depois, os ensaios celulares mostram o que essas moléculas fazem, da citotoxicidade ao mecanismo de ação em linhagens tumorais, incluindo a via PI3K-AKT-mTOR e a função mitocondrial. O mesmo caminho também é aplicado a doenças negligenciadas.",
+            "Entre os projetos atuais estão um novo inibidor das isoformas de AKT para câncer de próstata metastático, mama triplo-negativo e adenocarcinoma de pâncreas, e inibidores de cisteíno-proteases (catepsinas) com atividade antineoplásica, estudados por ensaios in silico, celulares e análise química."
           ],
           biography: [
-            "[Parágrafo com a trajetória: doutorado, pós-doutorado e posição atual.]"
+            "Andrei é graduado em Farmácia (1999) e em Bioquímica (2000), mestre (2002) e doutor (2006) em Química pela Universidade Federal de Minas Gerais (UFMG), sob orientação de Carlos Alberto Montanari. Fez pós-doutorado na University of New Mexico (EUA, 2007–2009, bolsa NIH) e na Universidade de Duisburg-Essen (Alemanha, 2010, bolsa Alexander von Humboldt).",
+            "Entrou no IQSC-USP em 2011, obteve a livre-docência em 2023 e hoje é professor associado do instituto."
           ],
           academicHighlights: [
-            "[Prêmio / financiamento, ano]",
-            "[Palestra de destaque, função editorial ou sociedade científica]"
+            "Bolsista de produtividade em pesquisa do CNPq (nível 2)",
+            "Membro do corpo editorial da Frontiers in Oncology (desde 2024) e da Frontiers in Pharmacology (desde 2022)",
+            "Palestra convidada no Cancer On Target 2025, Workshop on Molecular Oncology and Drug Discovery, FZEA/USP",
+            "Prêmio Paulo Freire, concedido pelos alunos da Licenciatura em Ciências Exatas, IFSC-USP (2022)",
+            "Segundo lugar em apresentação oral, 11º Congresso Internacional de Ciências Farmacêuticas – CIFARP (2017)",
+            "Prêmio BrazMedChem de Incentivo à Pesquisa em Química Medicinal – Pesquisador Jovem Talento (2010)",
+            "Capa da edição de novembro da Molecular Cancer Therapeutics (2007)",
+            "Artigos entre os Top-25 Hottest Articles da European Journal of Medicinal Chemistry (2008) e da Steroids (2006)",
+            "Revisor de periódicos como ACS Medicinal Chemistry Letters, RSC Medicinal Chemistry, Expert Opinion on Drug Discovery e Scientific Reports"
           ]
         }
       }
@@ -195,7 +211,7 @@ const SITE_PT = {
     publications: {
       tag: "Publicações",
       heading: "Nossa produção científica",
-      intro: "Publicações selecionadas dos dois grupos. Filtre por grupo ou busque por palavra-chave.",
+      intro: "Artigos dos dois grupos, dos mais recentes aos mais antigos. Filtre por grupo ou busque por palavra-chave, autor ou periódico.",
       searchPlaceholder: "Buscar por palavra-chave, autor ou periódico…"
     },
 
@@ -212,17 +228,17 @@ const SITE_PT = {
       intro: "Escreva para a gente se tiver interesse em colaborar, em entrar no laboratório como aluno ou pós-doc, ou em nos convidar para um seminário.",
       rows: [
         { label: "Endereço",
-          html: "[Sala, Prédio]<br>[Departamento]<br>[Universidade]<br>[Cidade, País]" },
+          html: "Laboratório 8, Instituto de Química de São Carlos (IQSC-USP)<br>Av. Trabalhador São-carlense, 400 – Parque Arnold Schimidt<br>13566-590, São Carlos – SP, Brasil" },
         { label: "E-mail",
-          html: "[e-mail de contato geral]" },
+          html: "" },   // ← e-mail geral do laboratório (vazio = linha escondida)
         { label: "Twitter/X",
-          html: "[@usuário]" },
+          html: "<a href=\"https://x.com/reisdeoliveiraG\" target=\"_blank\" rel=\"noopener\">@reisdeoliveiraG</a>" },
         { label: "Vagas",
           html: "Estamos sempre procurando alunos e pós-docs. Escreva diretamente para o pesquisador cujo trabalho mais te interessa; os contatos estão na página Grupos." }
       ],
       funding: {
         heading: "Financiamento e vínculos",
-        badges: ["[Agência de fomento]", "[Agência de fomento]", "[Instituição]"]
+        badges: ["FAPESP", "CAPES", "CNPq", "USP", "IQSC"]
       },
       form: {
         heading: "Envie uma mensagem",
@@ -257,24 +273,34 @@ const SITE_PT = {
       viewGroup: "Ver grupo",
       viewFullProfile: "Ver perfil completo",
       scholarDefault: "Perfil acadêmico",
-      downloadCv: "Baixar CV",
       emailPh: "[e-mail de contato]",
       orcidPh: "[ORCID]",
       scholarTip: "Adicione o link do perfil acadêmico em data/data.groups.js",
-      cvTip: "Adicione um arquivo de CV e o link em data/data.groups.js",
       navAria: "Principal",
       menu: "Menu",
       close: "Fechar",
       homeAria: "Chemical Discovery Group — início",
       langAria: "Idioma",
       networkAria: "Rede do Chemical Discovery Group: dois pesquisadores principais, suas equipes, equipe técnica compartilhada e pesquisadores afiliados",
-      formNote: "Este formulário ainda não está funcionando. Por enquanto, escreva diretamente para os e-mails ao lado.",
+      formNote: "Este formulário ainda não está funcionando. Por enquanto, escreva diretamente para os pesquisadores — os e-mails estão na página Grupos.",
       allNews: "Todas as notícias",
       backToNews: "Todas as notícias",
       readMore: "Ler mais",
       moreNews: "Outras notícias",
       noNews: "Ainda não há posts com essa etiqueta.",
       filterByTag: "Filtrar por etiqueta",
+      prevPage: "Anterior",
+      nextPage: "Próxima",
+      pagesAria: "Páginas",
+      pubCount: "{n} publicações",
+      typeReview: "Revisão",
+      typeChapter: "Capítulo de livro",
+      typeProceedings: "Anais de congresso",
+      lattes: "Currículo Lattes ↗",
+      formSending: "Enviando…",
+      formSent: "Mensagem enviada. Obrigado! Responderemos em breve.",
+      formError: "Não foi possível enviar agora. Tente novamente ou escreva diretamente para os pesquisadores (e-mails na página Grupos).",
+      formMissing: "Preencha nome, e-mail e mensagem.",
       metaDescription: "Chemical Discovery Group: como os fármacos agem e como melhorá-los, com proteômica, quimioproteômica, XL-MS, biologia de sistemas, ensaios celulares e química medicinal."
     }
   },
@@ -289,6 +315,7 @@ const SITE_PT = {
     "[Short description of this student's project.]": "[Breve descrição do projeto.]",
     "[Short description of this technician's role.]": "[Breve descrição da função no laboratório.]",
     "[Years]": "[Anos]",
+    "[Role]": "[Cargo]",
     "[Now: current position]": "[Hoje: posição atual]",
     "[Journal name]": "[Nome do periódico]",
     "[Publication title — PLACEHOLDER, replace with a real publication]": "[Título da publicação — provisório, substitua por uma publicação real]",
@@ -305,6 +332,7 @@ const SITE_PT = {
     "Maria Eduarda Jacinto":       { role: "Mestranda" },
     "Natália Wolf":                { role: "Mestranda" },
     "Vitória Luiz Diotto":         { role: "Mestranda" },
+    "Margret Folashade Jones":     { role: "Mestranda" },
     "Anna Carolina Julien":        { role: "Aluna de iniciação científica" },
     "Maria Clara Cardoso Sarkis":  { role: "Aluna de iniciação científica" }
   },

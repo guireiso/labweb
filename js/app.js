@@ -58,14 +58,36 @@
     });
   }
   var resF = 'all', pubF = 'all';
-  function pubApply() {
-    var q = ($('pubSearch').value || '').trim().toLowerCase(), n = 0;
+  var PUB_PER_PAGE = 15, pubPage = 1;
+  // filter (group + search) → paginate → hide empty year headings → update count and pager
+  function pubApply(keepPage) {
+    if (keepPage !== true) pubPage = 1;
+    var q = ($('pubSearch').value || '').trim().toLowerCase(), match = [];
     document.querySelectorAll('#pubList .pub').forEach(function (c) {
       var okG = pubF === 'all' || c.getAttribute('data-groups').split(' ').indexOf(pubF) >= 0, okQ = !q || c.getAttribute('data-hay').indexOf(q) >= 0;
-      c.hidden = !(okG && okQ); if (!c.hidden) n++;
+      if (okG && okQ) match.push(c); else c.hidden = true;
     });
-    $('pubEmpty').hidden = n > 0;
+    var pages = Math.max(1, Math.ceil(match.length / PUB_PER_PAGE));
+    pubPage = Math.min(Math.max(1, pubPage), pages);
+    match.forEach(function (c, i) { c.hidden = Math.floor(i / PUB_PER_PAGE) !== pubPage - 1; });
+    document.querySelectorAll('#pubList .pub-year').forEach(function (h) {
+      h.hidden = !document.querySelector('#pubList .pub[data-year="' + h.getAttribute('data-year') + '"]:not([hidden])');
+    });
+    $('pubEmpty').hidden = match.length > 0;
+    $('pubCount').textContent = SITE.ui.pubCount.replace('{n}', match.length);
+    renderPager(pages);
   }
+  function renderPager(pages) {
+    var box = $('pubPager'), u = SITE.ui; if (!box) return;
+    if (pages < 2) { box.innerHTML = ''; box.hidden = true; return; }
+    box.hidden = false;
+    var nums = [], i;
+    for (i = 1; i <= pages; i++) if (pages <= 9 || i === 1 || i === pages || Math.abs(i - pubPage) <= 1) nums.push(i); else if (nums[nums.length - 1] !== '…') nums.push('…');
+    box.innerHTML = '<button class="pg pg-nav" data-p="' + (pubPage - 1) + '"' + (pubPage === 1 ? ' disabled' : '') + '><span aria-hidden="true">←</span> ' + u.prevPage + '</button>' +
+      nums.map(function (n) { return n === '…' ? '<span class="pg-gap">…</span>' : '<button class="pg' + (n === pubPage ? ' on' : '') + '" data-p="' + n + '"' + (n === pubPage ? ' aria-current="page"' : '') + '>' + n + '</button>'; }).join('') +
+      '<button class="pg pg-nav" data-p="' + (pubPage + 1) + '"' + (pubPage === pages ? ' disabled' : '') + '>' + u.nextPage + ' <span aria-hidden="true">→</span></button>';
+  }
+
 
   /* ── groups: tabs + profile ── */
   function selectGroup(key, scrollTo) {
@@ -90,9 +112,28 @@
       $('newsEmpty').hidden = n > 0;
     });
     $('pubSearch').addEventListener('input', pubApply);
+    $('pubPager').addEventListener('click', function (e) {
+      var b = e.target.closest('.pg[data-p]'); if (!b || b.disabled) return;
+      pubPage = +b.getAttribute('data-p'); pubApply(true);
+      var top = $('pubCount').getBoundingClientRect().top + window.scrollY - 110;
+      window.scrollTo({ top: top, behavior: reduce ? 'auto' : 'smooth' });
+    });
+    pubApply();
     $('groupTabs').addEventListener('click', function (e) { var t = e.target.closest('.tab'); if (t) { selectGroup(t.getAttribute('data-g')); history.replaceState(null, '', '#/groups/' + t.getAttribute('data-g')); } });
     $('netReset').addEventListener('click', function () { CDGNetwork.reset(); });
-    $('contactForm').addEventListener('submit', function (e) { e.preventDefault(); $('formNote').textContent = SITE.ui.formNote; });
+    $('contactForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var form = e.target, note = $('formNote'), u = SITE.ui, url = (SITE.contact.form || {}).endpoint;
+      if (!url) { note.textContent = u.formNote; return; }   // no form service connected yet (see data.contact.js)
+      var data = new FormData(form);
+      if (!data.get('name') || !data.get('email') || !data.get('message')) { note.textContent = u.formMissing; return; }
+      data.append('_subject', 'Chemical Discovery Group website — message from ' + data.get('name'));
+      var btn = form.querySelector('button[type=submit]'); btn.disabled = true; note.textContent = u.formSending;
+      fetch(url, { method: 'POST', body: data, headers: { Accept: 'application/json' } })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); form.reset(); note.textContent = u.formSent; })
+        .catch(function () { note.textContent = u.formError; })
+        .then(function () { btn.disabled = false; });
+    });
   }
 
   /* ── language ── */
