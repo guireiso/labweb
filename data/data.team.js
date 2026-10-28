@@ -45,18 +45,21 @@ SITE.team = {
     { group: "leitao", level: "phd", role: "PhD Student",
       name: "Jorge Roberto Assunção Cardoso",
       photo: "photos/PhDStudent_AL_Jorge Roberto Assunção Cardoso.jpeg",
-      // bio: "", bio_pt: "",   ← short description of the project (English / Portuguese)
+      bio: "A member of the Chemical Discovery Group (CDG), Jorge Roberto, MSc, develops allosteric inhibitors of Akt proteins, looking for new alternatives for cancer treatment. He balances biomedical research with teaching Chemistry. Outside the lab, he channels his discipline and focus into studying classical guitar and into his passion for classical music and rock/metal.",
+      bio_pt: "Membro do Chemical Discovery Group (CDG), Me. Jorge Roberto atua no desenvolvimento de inibidores alostéricos para as proteínas Akt, focando em novas alternativas para o tratamento do câncer. Concilia a pesquisa biomédica com o ensino de Química. Fora do laboratório, canaliza sua disciplina e foco no estudo de violão erudito e na sua paixão por música clássica e Rock/Metal."
     },
     { group: "leitao", level: "phd", role: "PhD Student",
       name: "Sabrina Mendes Botelho",
       photo: "photos/PhDStudent_AL_Sabrina Mendes Botelho.jpg",
-      // bio: "", bio_pt: "",   ← short description of the project (English / Portuguese)
+      bio: "Sabrina is a chemist working on pancreatic cancer research, investigating the effects and mechanisms of potential new therapeutic compounds. Outside the lab, she enjoys sports, going to concerts, and discovering new places and experiences.",
+      bio_pt: "Sabrina é química e pesquisa câncer de pâncreas, investigando os efeitos e os mecanismos de possíveis novos compostos terapêuticos. Fora do laboratório, gosta de praticar esportes, ir a shows e conhecer novos lugares e experiências."
     },
 
     { group: "leitao", level: "msc", role: "MSc Student",
       name: "Maria Eduarda Jacinto",
       photo: "photos/MSStudent_AL_Maria Eduarda Jacinto.jpeg",
-      // bio: "", bio_pt: "",   ← short description of the project (English / Portuguese)
+      bio: "Maria Eduarda is an MSc student at the CDG. She works on the cytotoxic and antiproliferative activity of Myracrodruon urundeuva extracts in breast and prostate cancer cell lines. Beyond research, she is passionate about art in all its forms, especially dance, and spends part of her free time doing ballet.",
+      bio_pt: "Maria Eduarda é mestranda do CDG e trabalha com a atividade citotóxica e antiproliferativa de extratos de Myracrodruon urundeuva em linhagens de câncer de mama e próstata. Além da pesquisa, é apaixonada por arte em todas as formas possíveis, em particular pela dança, e dedica parte do seu tempo livre ao ballet."
     },
     { group: "leitao", level: "msc", role: "MSc Student",
       name: "Natália Wolf",
@@ -89,7 +92,8 @@ SITE.team = {
     { level: "staff", role: "Staff",
       name: "Juliana Torini",
       photo: "photos/Staff_Juliana Torini.jpeg",
-      // bio: "", bio_pt: "",   ← short description of the role (English / Portuguese)
+      bio: "Juliana R. Torini is a Structural Biology Specialist at IQSC/USP, with a Ph.D. in Applied Physics and expertise in protein crystallography, cryo-electron microscopy, and molecular biophysics. Her work focuses on understanding protein structure and function to support the discovery and development of novel therapeutics.",
+      bio_pt: "Juliana R. Torini é especialista em biologia estrutural no IQSC/USP, doutora em Física Aplicada e com experiência em cristalografia de proteínas, criomicroscopia eletrônica e biofísica molecular. Seu trabalho busca entender a estrutura e a função de proteínas para apoiar a descoberta e o desenvolvimento de novos fármacos."
     }
 
     // Reis-de-Oliveira group members go here, e.g.:

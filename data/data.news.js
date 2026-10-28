@@ -16,6 +16,9 @@
    - tags:    one or more labels, e.g. ["Publication"], ["Event"],
               ["Team"], ["Award"], ["Lab"]. Posts can be filtered by tag.
    - image:   optional, e.g. "photos/news/congress-2026.jpg" ("" = none)
+   - imageBg: optional. For images with a plain background (e.g. a white
+              poster or logo), set the colour, e.g. "#ffffff": the image is
+              then shown whole on a panel of that colour instead of cropped.
    - title, summary: short; shown on the home page and the list
    - body:    the full text, one string per paragraph. Simple HTML
               is allowed: <a href="…">link</a>, <em>, <strong>.
@@ -33,6 +36,34 @@ SITE.news = {
   homeTag: "Latest news",
 
   posts: [
+    {
+      slug: "cancer-on-target-2027",
+      date: "2026-10-27",
+      tags: ["Event"],
+      tags_pt: ["Evento"],
+      image: "photos/news/cancer-on-target-2027.jpg",
+      imageBg: "#ffffff",
+      title: "Cancer on Target 2027 comes to São Carlos",
+      title_pt: "Cancer on Target 2027 chega a São Carlos",
+      summary: "The second edition of Cancer on Target will take place on September 8–9, 2027, at IQSC-USP in São Carlos, with international speakers, short courses and a poster session.",
+      summary_pt: "A segunda edição do Cancer on Target acontece nos dias 8 e 9 de setembro de 2027, no IQSC-USP, em São Carlos, com palestrantes internacionais, minicursos e sessão de pôsteres.",
+      body: [
+        "The Chemical Discovery Group is co-organizing the second edition of <strong>Cancer on Target</strong>, a two-day scientific meeting on <strong>September 8–9, 2027</strong>, at the Luiz Gastão Amphitheater and IQSC-USP, in São Carlos (SP, Brazil).",
+        "Most cancer meetings in Brazil focus on the clinical side. Cancer on Target brings together researchers from chemistry, biology, physics and the health sciences to present their work and discuss cancer in depth, from molecular targets to new therapies. The first edition was held at FZEA-USP in Pirassununga; this one is a joint effort between FZEA-USP and IQSC-USP.",
+        "<strong>Program.</strong> Four sessions: macromolecular targets and anticancer drugs; experimental models; cancer biology and therapeutic tools; and pharmacological studies and mechanism of action. The program also includes short talks selected by the Scientific Committee, a poster session at IQSC and awards at the closing ceremony.",
+        "<strong>Speakers.</strong> Daniel Öhlund (Umeå University, Sweden), Susanne Müller-Knapp (Goethe University Frankfurt / SGC Frankfurt, Germany) and Tracy Putoczki (Walter and Eliza Hall Institute of Medical Research, Australia), together with researchers from FCFRP-USP, Hospital de Amor de Barretos, UDESC, UNIFESP, FMVZ-USP, FZEA-USP, ICB-USP, UFPE and IQSC-USP.",
+        "<strong>Short courses.</strong> Before and after the meeting, short courses will be offered at IQSC-USP and FMVZ-USP: <em>in vitro</em> and <em>in vivo</em> models to study the mechanism of action of kinase inhibitors, gene editing with CRISPR-Cas, bioprinting, and an introduction to organoids (the last three in Portuguese). Meeting participants will have free access to one of the courses.",
+        "<strong>Organizing committee.</strong> Andrei Leitão, Guilherme Reis-de-Oliveira and Juliana Torini (IQSC-USP); Heidge Fukumasu and Pedro Xavier (FZEA-USP). More information, including registration, will be posted here."
+      ],
+      body_pt: [
+        "O Chemical Discovery Group está coorganizando a segunda edição do <strong>Cancer on Target</strong>, um encontro científico de dois dias que acontece em <strong>8 e 9 de setembro de 2027</strong>, no Anfiteatro Luiz Gastão e no IQSC-USP, em São Carlos (SP).",
+        "A maioria dos eventos sobre câncer no Brasil é voltada à área clínica. O Cancer on Target reúne pesquisadores da química, da biologia, da física e das ciências da saúde para apresentar seus trabalhos e discutir o câncer a fundo, dos alvos moleculares às novas terapias. A primeira edição foi realizada na FZEA-USP, em Pirassununga; esta é um esforço conjunto da FZEA-USP e do IQSC-USP.",
+        "<strong>Programação.</strong> Quatro sessões: alvos macromoleculares e fármacos antitumorais; modelos experimentais; biologia do câncer e ferramentas terapêuticas; e estudos farmacológicos e mecanismo de ação. A programação inclui ainda apresentações curtas selecionadas pela Comissão Científica, sessão de pôsteres no IQSC e premiação no encerramento.",
+        "<strong>Palestrantes.</strong> Daniel Öhlund (Umeå Universitet, Suécia), Susanne Müller-Knapp (Goethe-Universität Frankfurt / SGC Frankfurt, Alemanha) e Tracy Putoczki (Walter and Eliza Hall Institute of Medical Research, Austrália), além de pesquisadores da FCFRP-USP, Hospital de Amor de Barretos, UDESC, UNIFESP, FMVZ-USP, FZEA-USP, ICB-USP, UFPE e IQSC-USP.",
+        "<strong>Minicursos.</strong> Antes e depois do evento, serão oferecidos minicursos no IQSC-USP e na FMVZ-USP: modelos <em>in vitro</em> e <em>in vivo</em> para estudar o mecanismo de ação de inibidores de quinases, edição gênica com CRISPR-Cas, bioimpressão e introdução a organoides (os três últimos em português). Os participantes do evento terão acesso gratuito a um dos minicursos.",
+        "<strong>Comissão organizadora.</strong> Andrei Leitão, Guilherme Reis-de-Oliveira e Juliana Torini (IQSC-USP); Heidge Fukumasu e Pedro Xavier (FZEA-USP). Mais informações, incluindo as inscrições, serão divulgadas aqui."
+      ]
+    },
     {
       slug: "leitao-cancer-on-target-2025",
       date: "2025-10-02",

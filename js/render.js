@@ -145,7 +145,8 @@
       '<h4 class="team-h">' + esc((SITE.team.alumni || {}).heading || 'Alumni') + '</h4>' +
       (alumni.length ? '<ul class="alumni">' + alumni.map(function (a) { return '<li>' + avatar(a, 'av-sm') + '<div><b>' + esc(a.name) + '</b>' + [a.role, a.years].filter(Boolean).map(function (x) { return ' · ' + ph(esc(x)); }).join('') + (a.now ? '<span>' + ph(esc(a.now)) + '</span>' : '') + '</div></li>'; }).join('') + '</ul>' : '<p class="empty">' + esc(U().noAlumni) + '</p>') + '</div>';
   }
-  function person(m) { return '<li class="person" data-name="' + esc(m.name) + '">' + avatar(m, 'av-sm') + '<div><b>' + esc(m.name) + '</b><span>' + esc(m.role) + '</span>' + (m.bio ? '<p>' + ph(esc(m.bio)) + '</p>' : '') + '</div></li>'; }
+  // roster card: photo, name and role only; the description (bio) opens in the pop-up card on click
+  function person(m) { return '<li class="person' + (m.bio ? ' has-bio' : '') + '" data-name="' + esc(m.name) + '"' + (m.bio ? ' tabindex="0" role="button"' : '') + '>' + avatar(m, 'av-sm') + '<div><b>' + esc(m.name) + '</b><span>' + esc(m.role) + '</span></div></li>'; }
 
   /* ── PUBLICATIONS ── */
   function renderPublications() {
@@ -214,7 +215,7 @@
         tags.map(function (t) { return '<button class="pill" data-f="' + esc(t) + '">' + ph(esc(t)) + '</button>'; }).join('') + '</div>' : '') +
       '<div class="grid nlist" id="newsList">' + all.map(function (p) {
         return '<article class="card npost" data-tags="' + esc((p.tags || []).join('|')) + '"><a href="#/news/' + esc(p.slug) + '">' +
-          (p.image ? '<img class="ncover" src="' + esc(encodeURI(p.image)) + '" alt="" loading="lazy">' : '') +
+          (p.image ? '<img class="ncover' + (p.imageBg ? ' fit' : '') + '" src="' + esc(encodeURI(p.image)) + '" alt=""' + (p.imageBg ? ' style="background:' + esc(p.imageBg) + '"' : '') + ' loading="lazy">' : '') +
           postMeta(p) + '<h3>' + ph(esc(p.title)) + '</h3>' + (p.summary ? '<p>' + ph(esc(p.summary)) + '</p>' : '') +
           '<span class="nread">' + esc(U().readMore) + ' <span aria-hidden="true">→</span></span></a></article>';
       }).join('') + '</div><p class="empty" id="newsEmpty" hidden>' + esc(U().noNews) + '</p></div>' +
@@ -228,7 +229,7 @@
     var others = all.filter(function (x) { return x !== p; }).slice(0, 3);
     art.innerHTML = '<a class="nlink nback" href="#/news"><span aria-hidden="true">←</span> ' + esc(U().backToNews) + '</a>' +
       postMeta(p) + '<h2>' + ph(esc(p.title)) + '</h2>' + (p.summary ? '<p class="nlead">' + ph(esc(p.summary)) + '</p>' : '') +
-      (p.image ? '<img class="nimg" src="' + esc(encodeURI(p.image)) + '" alt="">' : '') +
+      (p.image ? '<img class="nimg' + (p.imageBg ? ' fit' : '') + '" src="' + esc(encodeURI(p.image)) + '" alt=""' + (p.imageBg ? ' style="background:' + esc(p.imageBg) + '"' : '') + '>' : '') +
       '<div class="nbody">' + (p.body || []).map(function (t) { return '<p>' + ph(t) + '</p>'; }).join('') + '</div>' +
       (others.length ? '<h4 class="nmore-h">' + esc(U().moreNews) + '</h4><ul class="hnews">' + others.map(headline).join('') + '</ul>' : '');
     idx.hidden = true; art.hidden = false;

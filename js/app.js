@@ -121,6 +121,16 @@
     pubApply();
     $('groupTabs').addEventListener('click', function (e) { var t = e.target.closest('.tab'); if (t) { selectGroup(t.getAttribute('data-g')); history.replaceState(null, '', '#/groups/' + t.getAttribute('data-g')); } });
     $('netReset').addEventListener('click', function () { CDGNetwork.reset(); });
+    // roster cards with a description open the same pop-up card as the network
+    function openPerson(e) {
+      var li = e.target.closest('.person.has-bio'); if (!li) return;
+      if (e.type === 'keydown' && e.key !== 'Enter' && e.key !== ' ') return;
+      e.preventDefault();
+      var m = (SITE.team.members || []).filter(function (x) { return x.name === li.getAttribute('data-name'); })[0]; if (!m) return;
+      CDGApp.personModal({ person: m, group: m.group ? CDGRender.group(m.group) : null, sub: m.role });
+    }
+    $('profile').addEventListener('click', openPerson);
+    $('profile').addEventListener('keydown', openPerson);
     $('contactForm').addEventListener('submit', function (e) {
       e.preventDefault();
       var form = e.target, note = $('formNote'), u = SITE.ui, url = (SITE.contact.form || {}).endpoint;

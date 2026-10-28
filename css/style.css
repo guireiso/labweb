@@ -196,7 +196,8 @@ p { line-height: 1.7; }
 .lvl { margin-top: 20px; } .lvl h4 { margin: 0 0 12px; color: var(--c-subtle); }
 .lvl.shared h4 { color: var(--c-neutral); }
 .people { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 12px; }
-.person { display: flex; gap: 14px; padding: 14px; border-radius: 8px; border: 1px solid var(--c-line); background: rgba(5,10,20,.5); }
+.person { display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: 8px; border: 1px solid var(--c-line); background: rgba(5,10,20,.5); }
+.person.has-bio { cursor: pointer; transition: border-color .25s; } .person.has-bio:hover, .person.has-bio:focus-visible { border-color: var(--g, var(--c-teal-edge)); outline: none; }
 .person b { font-weight: 500; display: block; } .person span { font-size: 12.5px; color: var(--g); } .person p { margin: 6px 0 0; font-size: 13px; line-height: 1.5; color: var(--c-muted); }
 .lvl.shared .person span { color: var(--c-neutral); }
 .alumni { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 14px; color: var(--c-muted); }
@@ -292,6 +293,9 @@ p { line-height: 1.7; }
 .npage h2 { margin: 14px 0 0; font-size: clamp(32px, 3.8vw, 54px); line-height: 1.08; }
 .nlead { margin: 20px 0 0; font-size: 19px; line-height: 1.55; color: var(--c-ink); }
 .nimg { display: block; width: 100%; border-radius: 8px; margin: 30px 0 0; }
+/* images with their own background colour (imageBg in data.news.js): shown whole, on that colour */
+.ncover.fit { object-fit: contain; aspect-ratio: 4 / 3; padding: 14px; }
+.nimg.fit { object-fit: contain; max-height: 620px; padding: 24px; }
 .nbody { margin-top: 28px; }
 .nbody p { margin: 0 0 18px; font-size: 17px; line-height: 1.75; color: #c3ccd7; }
 .nbody a { color: var(--c-teal); }
