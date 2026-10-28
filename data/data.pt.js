@@ -231,8 +231,8 @@ const SITE_PT = {
           html: "Laboratório 8, Instituto de Química de São Carlos (IQSC-USP)<br>Av. Trabalhador São-carlense, 400 – Parque Arnold Schimidt<br>13566-590, São Carlos – SP, Brasil" },
         { label: "E-mail",
           html: "" },   // ← e-mail geral do laboratório (vazio = linha escondida)
-        { label: "Twitter/X",
-          html: "<a href=\"https://x.com/reisdeoliveiraG\" target=\"_blank\" rel=\"noopener\">@reisdeoliveiraG</a>" },
+        { label: "Instagram",
+          html: "<a href=\"https://www.instagram.com/cdg_iqsc/\" target=\"_blank\" rel=\"noopener\">@cdg_iqsc</a>" },
         { label: "Vagas",
           html: "Estamos sempre procurando alunos e pós-docs. Escreva diretamente para o pesquisador cujo trabalho mais te interessa; os contatos estão na página Grupos." }
       ],
