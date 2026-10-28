@@ -22,9 +22,9 @@ SITE.contact = {
       html: ""   // ← add the lab's general e-mail here, e.g. "cdg@iqsc.usp.br" (empty = row hidden)
     },
     {
-      icon: "at",
-      label: "Twitter/X",
-      html: "<a href=\"https://x.com/reisdeoliveiraG\" target=\"_blank\" rel=\"noopener\">@reisdeoliveiraG</a>"
+      icon: "instagram",
+      label: "Instagram",
+      html: "<a href=\"https://www.instagram.com/cdg_iqsc/\" target=\"_blank\" rel=\"noopener\">@cdg_iqsc</a>"
     },
     {
       icon: "flask",
